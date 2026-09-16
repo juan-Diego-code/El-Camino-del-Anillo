@@ -1,7 +1,9 @@
+// ---------- ARREGLO DE DISPAROS ----------
 const disparos = [];
 const VELOCIDAD_DISPARO = 7;
 const TAMANO_DISPARO = 4;
 
+// ---------- CREAR UN DISPARO NUEVO ----------
 function crearDisparo() {
   disparos.push({
     x: nave.x,
@@ -11,6 +13,7 @@ function crearDisparo() {
   });
 }
 
+// ---------- ACTUALIZAR DISPAROS ----------
 function actualizarDisparos() {
   for (let i = disparos.length - 1; i >= 0; i--) {
     const d = disparos[i];
@@ -19,6 +22,7 @@ function actualizarDisparos() {
     d.y -= Math.cos(d.angulo) * VELOCIDAD_DISPARO;
     d.distanciaRecorrida += VELOCIDAD_DISPARO;
 
+    // eliminar el disparo si sale del canvas o viajó demasiado lejos
     const fueraDeRango =
       d.x < 0 || d.x > canvas.width ||
       d.y < 0 || d.y > canvas.height ||
@@ -30,6 +34,7 @@ function actualizarDisparos() {
   }
 }
 
+// ---------- DIBUJAR DISPAROS ----------
 function dibujarDisparos() {
   ctx.fillStyle = "#ffdd00";
   disparos.forEach((d) => {
@@ -39,6 +44,7 @@ function dibujarDisparos() {
   });
 }
 
+// ---------- DISPARAR CON LA BARRA ESPACIADORA ----------
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     crearDisparo();
