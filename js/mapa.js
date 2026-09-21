@@ -95,7 +95,31 @@ function crearMapaComarca() {
     ancho: cols * T,
     alto: filas * T,
     inicio: { x: 6 * T + T / 2, y: 15 * T },
-    salidas: [{ x: (cols - 1) * T, y: 14 * T, ancho: T, alto: 2 * T, destino: "moria" }]
+    salidas: [{ x: (cols - 1) * T, y: 14 * T, ancho: T, alto: 2 * T, destino: "moria" }],
+    spawnsEnemigos: [
+      { tipo: "jinete", x: 14 * T + T / 2, y: 9 * T + T / 2 },
+      { tipo: "jinete", x: 21 * T + T / 2, y: 18 * T + T / 2 },
+      { tipo: "jinete", x: 9 * T + T / 2, y: 11 * T + T / 2 },
+      { tipo: "jinete", x: 19 * T + T / 2, y: 6 * T + T / 2 }
+    ],
+    npcs: [
+      {
+        x: 9 * T + T / 2, y: 15 * T - 4, nombre: "Sam", color: "#c98a3a",
+        lineas: [
+          "¡Señor Frodo! No debe andar solo por aquí.",
+          "Dicen que los Jinetes Negros rondan los caminos de la Comarca.",
+          "Si los derrota a todos, tal vez el camino al este se despeje."
+        ]
+      },
+      {
+        x: 18 * T + T / 2, y: 4 * T + T / 2, nombre: "Gandalf", color: "#d8d8e0",
+        lineas: [
+          "El Anillo debe ser destruido, Frodo, y solo el fuego de la Grieta del Destino puede lograrlo.",
+          "Pero antes, la Comarca debe quedar libre de la Sombra.",
+          "Derrota a los cinco Jinetes que la acechan para abrir el camino hacia Moria."
+        ]
+      }
+    ]
   };
 }
 

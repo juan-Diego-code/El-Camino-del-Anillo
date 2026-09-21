@@ -43,11 +43,18 @@ function detectarColisiones() {
 
   for (const s of mapaActual.salidas) {
     const tocaSalida = izq < s.x + s.ancho && der > s.x && arr < s.y + s.alto && aba > s.y;
-    if (tocaSalida) {
-      // en la Fase 4 esto abrirá la zona siguiente cuando la misión esté cumplida
-      mostrarMensaje("El camino sigue cerrado por ahora...");
+    if (!tocaSalida) continue;
+
+    if (!mision || !mision.completa) {
+      mostrarMensaje("El camino sigue cerrado. Misión: " + (mision ? mision.descripcion : "?"));
+    } else if (GENERADORES_DE_MAPA[s.destino]) {
+      cargarZona(s.destino);
+      mostrarBanner();
+    } else {
+      const nombreDestino = ZONAS[s.destino] ? ZONAS[s.destino].nombre : "lo desconocido";
+      mostrarMensaje("Más allá aguarda " + nombreDestino + "... (próximamente)");
     }
   }
 
-  // Fase 2: espada y flechas vs enemigos, enemigos vs jugador
+  // Fase 4: lava de Mordor y jefe final
 }

@@ -10,7 +10,18 @@ const jugador = {
   caminando: false,
   animacion: 0,
   vida: 6,            // en medios corazones: 6 = 3 corazones
-  vidaMax: 6
+  vidaMax: 6,
+  flechas: 5,
+  flechasMax: 20,
+  pociones: 0,
+  llaves: 0,
+  nivel: 1,
+  xp: 0,
+  xpSiguienteNivel: 20,
+  danoExtra: 0,
+  invulnerableHasta: 0,
+  knockX: 0,
+  knockY: 0
 };
 
 // ---------- COLOCAR AL JUGADOR EN EL INICIO DE LA ZONA ----------
@@ -19,10 +30,64 @@ function colocarJugadorEnInicio() {
   jugador.y = mapaActual.inicio.y;
   jugador.direccion = "abajo";
   jugador.caminando = false;
+  jugador.knockX = 0;
+  jugador.knockY = 0;
+}
+
+// ---------- RECIBIR DAÑO (con invulnerabilidad breve y knockback) ----------
+function danarJugador(dano, dir) {
+  if (juegoTerminado || tiempo < jugador.invulnerableHasta) return;
+
+  jugador.vida -= dano;
+  jugador.invulnerableHasta = tiempo + 900;
+
+  const largo = Math.hypot(dir.x, dir.y) || 1;
+  jugador.knockX = (dir.x / largo) * 5;
+  jugador.knockY = (dir.y / largo) * 5;
+
+  if (jugador.vida <= 0) {
+    jugador.vida = 0;
+    mostrarPantallaGameOver();
+  }
+}
+
+// ---------- GANAR EXPERIENCIA Y SUBIR DE NIVEL ----------
+function subirNivelSiCorresponde() {
+  while (jugador.xp >= jugador.xpSiguienteNivel) {
+    jugador.xp -= jugador.xpSiguienteNivel;
+    jugador.nivel++;
+    jugador.xpSiguienteNivel = Math.round(jugador.xpSiguienteNivel * 1.4);
+    jugador.vidaMax += 2;
+    jugador.vida = jugador.vidaMax;
+    jugador.danoExtra++;
+    mostrarMensaje("¡Subiste a nivel " + jugador.nivel + "! Vida y daño aumentados.");
+  }
 }
 
 // ---------- ACTUALIZAR JUGADOR (dt = 1 equivale a un frame a 60 fps) ----------
 function actualizarJugador(dt) {
+  // mientras hay un diálogo en curso, el jugador no se mueve
+  if (dialogoActivo) {
+    jugador.caminando = false;
+    return;
+  }
+
+  // mientras hay retroceso por un golpe, ignora el control del jugador
+  if (jugador.knockX !== 0 || jugador.knockY !== 0) {
+    const nx = jugador.x + jugador.knockX * dt;
+    const ny = jugador.y + jugador.knockY * dt;
+    if (!chocaConMapa(nx, jugador.y, jugador.ancho, jugador.alto)) jugador.x = nx;
+    if (!chocaConMapa(jugador.x, ny, jugador.ancho, jugador.alto)) jugador.y = ny;
+
+    jugador.knockX *= 0.85;
+    jugador.knockY *= 0.85;
+    if (Math.abs(jugador.knockX) < 0.15) jugador.knockX = 0;
+    if (Math.abs(jugador.knockY) < 0.15) jugador.knockY = 0;
+
+    jugador.caminando = false;
+    return;
+  }
+
   let dx = 0;
   let dy = 0;
   if (teclas["arrowleft"] || teclas["a"]) dx -= 1;
@@ -53,8 +118,19 @@ function actualizarJugador(dt) {
   jugador.animacion += dt;
 }
 
+// ---------- VECTOR UNITARIO SEGÚN LA DIRECCIÓN DEL JUGADOR ----------
+function vectorDireccion(dir) {
+  if (dir === "arriba") return { x: 0, y: -1 };
+  if (dir === "abajo") return { x: 0, y: 1 };
+  if (dir === "izquierda") return { x: -1, y: 0 };
+  return { x: 1, y: 0 };
+}
+
 // ---------- DIBUJAR JUGADOR ----------
 function dibujarJugador() {
+  // parpadeo mientras es invulnerable
+  if (tiempo < jugador.invulnerableHasta && Math.floor(tiempo / 80) % 2 === 0) return;
+
   const { x, y, direccion } = jugador;
   const lateral = direccion === "izquierda" || direccion === "derecha";
   const paso = jugador.caminando ? Math.sin(jugador.animacion * 0.5) : 0;

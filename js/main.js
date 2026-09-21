@@ -1,6 +1,37 @@
 // ---------- FUENTE DEL JUEGO ----------
 const FUENTE = "Georgia, 'Times New Roman', serif";
 
+// ---------- MISIONES POR ZONA ----------
+const MISIONES = {
+  comarca: { descripcion: "Derrota a los Jinetes Negros", tipo: "derrotar", objetivoTipo: "jinete", meta: 5 }
+};
+
+let mision = null;
+
+function iniciarMision(id) {
+  const m = MISIONES[id];
+  if (!m) { mision = null; return; }
+  mision = {
+    descripcion: m.descripcion,
+    tipo: m.tipo,
+    objetivoTipo: m.objetivoTipo,
+    progreso: 0,
+    meta: m.meta,
+    completa: false
+  };
+}
+
+function avanzarMision(tipoEvento, dato) {
+  if (!mision || mision.completa) return;
+  if (mision.tipo === tipoEvento && dato === mision.objetivoTipo) {
+    mision.progreso = Math.min(mision.meta, mision.progreso + 1);
+    if (mision.progreso >= mision.meta) {
+      mision.completa = true;
+      mostrarMensaje("¡Misión cumplida! El camino hacia el este se abre.");
+    }
+  }
+}
+
 // ---------- CARGAR UNA ZONA ----------
 function cargarZona(id) {
   zonaActual = id;
@@ -8,13 +39,28 @@ function cargarZona(id) {
   colocarJugadorEnInicio();
   canvas.style.borderColor = temaActual().acento;
   actualizarCamara();
+
+  enemigos.length = 0;
+  objetosSuelo.length = 0;
+  flechasJugador.length = 0;
+  (mapaActual.spawnsEnemigos || []).forEach((s) => crearEnemigo(s.tipo, s.x, s.y));
+
+  cargarNpcsDeZona();
+  iniciarMision(id);
 }
 
 // ---------- INICIAR / REINICIAR PARTIDA ----------
 function iniciarPartida() {
   puntos = 0;
   juegoTerminado = false;
+  jugador.vidaMax = 6;
   jugador.vida = jugador.vidaMax;
+  jugador.flechas = 5;
+  jugador.pociones = 0;
+  jugador.nivel = 1;
+  jugador.xp = 0;
+  jugador.xpSiguienteNivel = 20;
+  jugador.danoExtra = 0;
   cargarZona("comarca");
   mostrarBanner();
 }
@@ -159,17 +205,17 @@ function dibujarHUD() {
   const tema = temaActual();
 
   ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-  ctx.fillRect(8, 8, 270, 82);
+  ctx.fillRect(8, 8, 300, 150);
   ctx.strokeStyle = tema.acento;
   ctx.lineWidth = 2;
-  ctx.strokeRect(8, 8, 270, 82);
+  ctx.strokeRect(8, 8, 300, 150);
 
   // corazones (cada corazón = 2 puntos de vida)
   const corazones = jugador.vidaMax / 2;
   for (let i = 0; i < corazones; i++) {
     const valor = jugador.vida - i * 2;
     const llenado = valor >= 2 ? 1 : valor === 1 ? 0.5 : 0;
-    dibujarCorazon(20 + i * 28, 16, 20, llenado);
+    dibujarCorazon(20 + i * 22, 16, 18, llenado);
   }
 
   ctx.textAlign = "left";
@@ -177,9 +223,31 @@ function dibujarHUD() {
   ctx.font = "bold 17px " + FUENTE;
   ctx.fillText(tema.nombre, 20, 61);
 
+  const textoObjetivo = mision
+    ? mision.descripcion + " (" + mision.progreso + "/" + mision.meta + ")"
+    : tema.objetivo;
   ctx.fillStyle = "#e8dcc0";
   ctx.font = "italic 14px " + FUENTE;
-  ctx.fillText("Objetivo: " + tema.objetivo, 20, 80);
+  ctx.fillText(textoObjetivo, 20, 80);
+
+  ctx.fillStyle = "#cfd8dc";
+  ctx.font = "14px " + FUENTE;
+  ctx.fillText("Flechas: " + jugador.flechas + "   Pociones: " + jugador.pociones, 20, 98);
+
+  // nivel y barra de experiencia
+  ctx.fillStyle = "#e8dcc0";
+  ctx.font = "13px " + FUENTE;
+  ctx.fillText("Nivel " + jugador.nivel, 20, 118);
+
+  const bw = 250;
+  const bh = 10;
+  ctx.fillStyle = "#3a2f1a";
+  ctx.fillRect(20, 126, bw, bh);
+  ctx.fillStyle = "#7ddc5a";
+  ctx.fillRect(20, 126, bw * (jugador.xp / jugador.xpSiguienteNivel), bh);
+  ctx.strokeStyle = "#f3e2b0";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(20, 126, bw, bh);
 }
 
 // ---------- DIBUJAR TODA LA ESCENA ----------
@@ -191,13 +259,19 @@ function dibujarEscena() {
   ctx.save();
   ctx.translate(-Math.round(camara.x), -Math.round(camara.y));
   dibujarMapa();
+  dibujarObjetosSuelo();
+  dibujarNPCs();
+  dibujarEnemigos();
+  dibujarFlechasJugador();
   dibujarJugador();
+  dibujarEspada();
   ctx.restore();
 
   // la interfaz se dibuja fija sobre la pantalla
   dibujarHUD();
   dibujarMensaje();
   dibujarBanner();
+  dibujarCuadroDialogo();
 }
 
 // ---------- GAME LOOP ----------
@@ -212,6 +286,10 @@ function gameLoop(ahora) {
 
   if (!juegoTerminado) {
     actualizarJugador(dt);
+    actualizarEnemigos(dt);
+    actualizarFlechasJugador(dt);
+    actualizarObjetosSuelo();
+    actualizarDialogo();
     actualizarCamara();
     detectarColisiones();
   }
