@@ -6,35 +6,48 @@ function distancia(x1, y1, x2, y2) {
 // ---------- ESTADO DEL JUEGO ----------
 let juegoTerminado = false;
 
+// ---------- QUÉ TILE HAY EN UN PUNTO DEL MAPA ----------
+// fuera del mapa cuenta como muro
+function tileEn(px, py) {
+  const x = Math.floor(px / TAMANO_TILE);
+  const y = Math.floor(py / TAMANO_TILE);
+  if (x < 0 || y < 0 || x >= mapaActual.cols || y >= mapaActual.filas) return "#";
+  return mapaActual.tiles[y][x];
+}
+
+// ---------- ¿UNA CAJA CENTRADA EN (cx, cy) CHOCA CON ALGÚN TILE SÓLIDO? ----------
+// la caja es más chica que un tile, así que basta revisar sus 4 esquinas
+function chocaConMapa(cx, cy, w, h) {
+  const x0 = cx - w / 2;
+  const x1 = cx + w / 2 - 0.01;
+  const y0 = cy - h / 2;
+  const y1 = cy + h / 2 - 0.01;
+
+  return (
+    TILES_SOLIDOS.has(tileEn(x0, y0)) ||
+    TILES_SOLIDOS.has(tileEn(x1, y0)) ||
+    TILES_SOLIDOS.has(tileEn(x0, y1)) ||
+    TILES_SOLIDOS.has(tileEn(x1, y1))
+  );
+}
+
 // ---------- DETECTAR TODAS LAS COLISIONES ----------
 function detectarColisiones() {
   if (juegoTerminado) return;
 
-  // flecha vs enemigo
-  for (let i = disparos.length - 1; i >= 0; i--) {
-    const d = disparos[i];
+  // jugador vs salidas de zona
+  const izq = jugador.x - jugador.ancho / 2;
+  const der = jugador.x + jugador.ancho / 2;
+  const arr = jugador.y - jugador.alto / 2;
+  const aba = jugador.y + jugador.alto / 2;
 
-    for (let j = piedras.length - 1; j >= 0; j--) {
-      const p = piedras[j];
-      const radioPiedra = p.tamano / 2;
-
-      if (distancia(d.x, d.y, p.x, p.y) < radioPiedra) {
-        disparos.splice(i, 1);
-        piedras.splice(j, 1);
-        puntos += 10;
-        break; // esta flecha ya se usó, pasar a la siguiente
-      }
+  for (const s of mapaActual.salidas) {
+    const tocaSalida = izq < s.x + s.ancho && der > s.x && arr < s.y + s.alto && aba > s.y;
+    if (tocaSalida) {
+      // en la Fase 4 esto abrirá la zona siguiente cuando la misión esté cumplida
+      mostrarMensaje("El camino sigue cerrado por ahora...");
     }
   }
 
-  // portador del Anillo vs enemigo
-  const radioNave = nave.tamano / 2;
-  for (const p of piedras) {
-    const radioPiedra = p.tamano / 2;
-    if (distancia(nave.x, nave.y, p.x, p.y) < radioNave + radioPiedra) {
-      juegoTerminado = true;
-      mostrarPantallaGameOver();
-      break;
-    }
-  }
+  // Fase 2: espada y flechas vs enemigos, enemigos vs jugador
 }
