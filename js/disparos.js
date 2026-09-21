@@ -1,7 +1,7 @@
-// ---------- ARREGLO DE DISPAROS ----------
+// ---------- ARREGLO DE DISPAROS (flechas élficas) ----------
 const disparos = [];
 const VELOCIDAD_DISPARO = 7;
-const TAMANO_DISPARO = 4;
+const TAMANO_DISPARO = 4; // la flecha mide 4 veces este valor de largo
 
 // ---------- CREAR UN DISPARO NUEVO ----------
 function crearDisparo() {
@@ -34,13 +34,45 @@ function actualizarDisparos() {
   }
 }
 
-// ---------- DIBUJAR DISPAROS ----------
+// ---------- DIBUJAR DISPAROS (flecha con destello dorado) ----------
 function dibujarDisparos() {
-  ctx.fillStyle = "#ffdd00";
+  const largo = TAMANO_DISPARO * 4;
+
   disparos.forEach((d) => {
+    ctx.save();
+    ctx.translate(d.x, d.y);
+    ctx.rotate(d.angulo); // 0 = apunta hacia arriba, igual que la nave
+
+    ctx.shadowColor = "#ffd24a";
+    ctx.shadowBlur = 8;
+
+    // astil
+    ctx.strokeStyle = "#f5e6a8";
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(d.x, d.y, TAMANO_DISPARO, 0, Math.PI * 2);
+    ctx.moveTo(0, largo / 2);
+    ctx.lineTo(0, -largo / 2);
+    ctx.stroke();
+
+    // punta
+    ctx.fillStyle = "#ffd24a";
+    ctx.beginPath();
+    ctx.moveTo(0, -largo / 2 - 4);
+    ctx.lineTo(-3, -largo / 2 + 2);
+    ctx.lineTo(3, -largo / 2 + 2);
+    ctx.closePath();
     ctx.fill();
+
+    // plumas
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, largo / 2 - 4);
+    ctx.lineTo(-3, largo / 2);
+    ctx.moveTo(0, largo / 2 - 4);
+    ctx.lineTo(3, largo / 2);
+    ctx.stroke();
+
+    ctx.restore();
   });
 }
 

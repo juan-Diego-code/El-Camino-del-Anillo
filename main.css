@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .contenedor-juego {
@@ -20,82 +20,90 @@ body {
   height: 600px;
 }
 
+/* el color del borde cambia según el nivel (lo pone main.js) */
 canvas {
   background: #000;
-  border: 2px solid #00e5ff;
+  border: 2px solid #ffd24a;
 }
 
-/* ---------- MENÚ DE INICIO ---------- */
-#menu-inicio {
+/* ---------- PANTALLAS (menú, game over y victoria comparten base) ---------- */
+#menu-inicio,
+#pantalla-gameover,
+#pantalla-victoria {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  padding: 0 40px;
   background: rgba(0, 0, 0, 0.9);
-  color: #ffffff;
+  color: #f3e2b0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 2px solid #00e5ff;
 }
 
-#menu-inicio h1 {
-  color: #00e5ff;
-  font-size: 3rem;
-  letter-spacing: 10px;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #00e5ff;
-}
-
-#menu-inicio p {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #cccccc;
-  margin-bottom: 30px;
-}
-
-#menu-inicio button {
+#menu-inicio button,
+#pantalla-gameover button,
+#pantalla-victoria button {
   padding: 14px 40px;
+  font-family: inherit;
   font-size: 1.2rem;
   font-weight: bold;
   color: #000;
-  background: #00e5ff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-#menu-inicio button:hover {
-  background: #66f2ff;
+/* ---------- MENÚ DE INICIO (dorado y rojo de Mordor) ---------- */
+#menu-inicio {
+  border: 2px solid #ffd24a;
 }
 
-/* ---------- PANTALLA DE GAME OVER (mismo estilo del menú) ---------- */
+#menu-inicio h1 {
+  color: #ffd24a;
+  font-size: 2.4rem;
+  letter-spacing: 6px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 12px #d92b1f;
+}
+
+#menu-inicio p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #cfc3a3;
+  margin-bottom: 26px;
+}
+
+#menu-inicio p.subtitulo {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #e8dcc0;
+}
+
+#menu-inicio button {
+  background: #ffd24a;
+}
+
+#menu-inicio button:hover {
+  background: #ffe28a;
+}
+
+/* ---------- PANTALLA DE GAME OVER (rojo) ---------- */
 #pantalla-gameover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #ff3355;
+  border: 2px solid #d92b1f;
 }
 
 #pantalla-gameover h1 {
-  color: #ff3355;
-  font-size: 3rem;
-  letter-spacing: 6px;
+  color: #ff4a2a;
+  font-size: 1.9rem;
+  letter-spacing: 3px;
   margin-bottom: 20px;
-  text-shadow: 0 0 10px #ff3355;
+  text-shadow: 0 0 12px #d92b1f;
 }
 
 #pantalla-gameover p {
@@ -104,47 +112,29 @@ canvas {
 }
 
 #pantalla-gameover button {
-  padding: 14px 40px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #000;
-  background: #ff3355;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  background: #d92b1f;
+  color: #fff;
 }
 
 #pantalla-gameover button:hover {
-  background: #ff6680;
+  background: #ff4a2a;
 }
 
 .oculto {
   display: none !important;
 }
 
-/* ---------- PANTALLA DE VICTORIA (mismo estilo, color verde) ---------- */
+/* ---------- PANTALLA DE VICTORIA (verde de la Comarca) ---------- */
 #pantalla-victoria {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #00ff88;
+  border: 2px solid #7ddc5a;
 }
 
 #pantalla-victoria h1 {
-  color: #00ff88;
-  font-size: 3rem;
-  letter-spacing: 6px;
+  color: #9be37a;
+  font-size: 1.9rem;
+  letter-spacing: 3px;
   margin-bottom: 20px;
-  text-shadow: 0 0 10px #00ff88;
+  text-shadow: 0 0 12px #7ddc5a;
 }
 
 #pantalla-victoria p {
@@ -153,16 +143,9 @@ canvas {
 }
 
 #pantalla-victoria button {
-  padding: 14px 40px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #000;
-  background: #00ff88;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  background: #7ddc5a;
 }
 
 #pantalla-victoria button:hover {
-  background: #4dffab;
+  background: #a6ec8a;
 }

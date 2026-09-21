@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Asteroids</title>
+  <title>El Camino del Anillo</title>
   <link rel="stylesheet" href="./main.css">
 </head>
 <body>
@@ -10,28 +10,32 @@
     <canvas id="canvas" width="800" height="600"></canvas>
 
     <div id="menu-inicio">
-      <h1>ASTEROIDS</h1>
-      <p>
-        → ←Rotar la nave<br>
-        ↑ ↓ Avanzar / retroceder<br>
-        Espacio: Disparar
+      <h1>EL CAMINO DEL ANILLO</h1>
+      <p class="subtitulo">
+        Cruza la Comarca, las Minas de Moria y Mordor.<br>
+        Que la Sombra no alcance al Portador.
       </p>
-      <button id="btn-jugar">Jugar</button>
+      <p>
+        ← → Girar al Portador<br>
+        ↑ ↓ Avanzar / retroceder<br>
+        Espacio: Disparar flecha élfica
+      </p>
+      <button id="btn-jugar">Comenzar la travesía</button>
     </div>
 
     <div id="pantalla-gameover" class="oculto">
-      <h1>GAME OVER</h1>
+      <h1>EL ANILLO DEBE SER DESTRUIDO</h1>
       <p id="puntaje-final"></p>
-      <button id="btn-reiniciar">Reiniciar</button>
+      <button id="btn-reiniciar">Intentarlo de nuevo</button>
+    </div>
+
+    <div id="pantalla-victoria" class="oculto">
+      <h1>¡EL ANILLO HA SIDO DESTRUIDO!</h1>
+      <p id="puntaje-victoria"></p>
+      <button id="btn-reiniciar-victoria">Volver a la Comarca</button>
     </div>
   </div>
 
-  <div id="pantalla-victoria" class="oculto">
-    <h1>¡GANASTE!</h1>
-    <p id="puntaje-victoria"></p>
-    <button id="btn-reiniciar-victoria">Jugar de nuevo</button>
-  </div>
-</div>
   <script src="./js/core.js"></script>
   <script src="./js/nave.js"></script>
   <script src="./js/piedras.js"></script>
@@ -40,4 +44,3 @@
   <script src="./js/main.js"></script>
 </body>
 </html>
-

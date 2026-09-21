@@ -10,7 +10,7 @@ let juegoTerminado = false;
 function detectarColisiones() {
   if (juegoTerminado) return;
 
-  // disparo vs piedra
+  // flecha vs enemigo
   for (let i = disparos.length - 1; i >= 0; i--) {
     const d = disparos[i];
 
@@ -22,12 +22,12 @@ function detectarColisiones() {
         disparos.splice(i, 1);
         piedras.splice(j, 1);
         puntos += 10;
-        break; // este disparo ya se usó, pasar al siguiente
+        break; // esta flecha ya se usó, pasar a la siguiente
       }
     }
   }
 
-  // nave vs piedra
+  // portador del Anillo vs enemigo
   const radioNave = nave.tamano / 2;
   for (const p of piedras) {
     const radioPiedra = p.tamano / 2;

@@ -1,8 +1,8 @@
-// ---------- IMAGEN DE LA NAVE ----------
+// ---------- IMAGEN DEL PORTADOR DEL ANILLO ----------
 const imgNave = new Image();
-imgNave.src = "assets/images/nave.svg";
+imgNave.src = "./assets/images/nave.svg";
 
-// ---------- OBJETO NAVE ----------
+// ---------- OBJETO NAVE (el Portador del Anillo) ----------
 const nave = {
   x: canvas.width / 2,
   y: canvas.height / 2,
@@ -26,7 +26,7 @@ function actualizarNave() {
     nave.y += Math.cos(nave.angulo) * nave.velocidad;
   }
 
-  // que la nave no se salga del canvas (aparece del otro lado)
+  // que el personaje no se salga del canvas (aparece del otro lado)
   if (nave.x < 0) nave.x = canvas.width;
   if (nave.x > canvas.width) nave.x = 0;
   if (nave.y < 0) nave.y = canvas.height;
