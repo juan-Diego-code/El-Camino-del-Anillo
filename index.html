@@ -6,8 +6,32 @@
   <link rel="stylesheet" href="./main.css">
 </head>
 <body>
-  <canvas id="canvas" width="800" height="600"></canvas>
+  <div class="contenedor-juego">
+    <canvas id="canvas" width="800" height="600"></canvas>
 
+    <div id="menu-inicio">
+      <h1>ASTEROIDS</h1>
+      <p>
+        → ←Rotar la nave<br>
+        ↑ ↓ Avanzar / retroceder<br>
+        Espacio: Disparar
+      </p>
+      <button id="btn-jugar">Jugar</button>
+    </div>
+
+    <div id="pantalla-gameover" class="oculto">
+      <h1>GAME OVER</h1>
+      <p id="puntaje-final"></p>
+      <button id="btn-reiniciar">Reiniciar</button>
+    </div>
+  </div>
+
+  <div id="pantalla-victoria" class="oculto">
+    <h1>¡GANASTE!</h1>
+    <p id="puntaje-victoria"></p>
+    <button id="btn-reiniciar-victoria">Jugar de nuevo</button>
+  </div>
+</div>
   <script src="./js/core.js"></script>
   <script src="./js/nave.js"></script>
   <script src="./js/piedras.js"></script>

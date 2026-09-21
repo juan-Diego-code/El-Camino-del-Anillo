@@ -1,14 +1,14 @@
 // ---------- IMAGEN DE LAS PIEDRAS ----------
 const imgPiedra = new Image();
-imgPiedra.src = "assets/images/piedra.svg";
+imgPiedra.src = "./assets/images/piedra.svg";
 
 // ---------- ARREGLO DE PIEDRAS ----------
 const piedras = [];
-const CANTIDAD_PIEDRAS = 5;
 
 // ---------- CREAR PIEDRAS INICIALES ----------
 function crearPiedras() {
-  for (let i = 0; i < CANTIDAD_PIEDRAS; i++) {
+  const cantidad = PIEDRAS_POR_NIVEL[nivelActual - 1];
+  for (let i = 0; i < cantidad; i++) {
     piedras.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,

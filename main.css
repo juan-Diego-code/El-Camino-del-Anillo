@@ -1,18 +1,168 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background: #000;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  canvas {
-    background: #000;
-    border: 2px solid #00e5ff;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.contenedor-juego {
+  position: relative;
+  width: 800px;
+  height: 600px;
+}
+
+canvas {
+  background: #000;
+  border: 2px solid #00e5ff;
+}
+
+/* ---------- MENÚ DE INICIO ---------- */
+#menu-inicio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #00e5ff;
+}
+
+#menu-inicio h1 {
+  color: #00e5ff;
+  font-size: 3rem;
+  letter-spacing: 10px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+#menu-inicio p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #cccccc;
+  margin-bottom: 30px;
+}
+
+#menu-inicio button {
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  background: #00e5ff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#menu-inicio button:hover {
+  background: #66f2ff;
+}
+
+/* ---------- PANTALLA DE GAME OVER (mismo estilo del menú) ---------- */
+#pantalla-gameover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ff3355;
+}
+
+#pantalla-gameover h1 {
+  color: #ff3355;
+  font-size: 3rem;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #ff3355;
+}
+
+#pantalla-gameover p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+#pantalla-gameover button {
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  background: #ff3355;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#pantalla-gameover button:hover {
+  background: #ff6680;
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* ---------- PANTALLA DE VICTORIA (mismo estilo, color verde) ---------- */
+#pantalla-victoria {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #00ff88;
+}
+
+#pantalla-victoria h1 {
+  color: #00ff88;
+  font-size: 3rem;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+#pantalla-victoria p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+#pantalla-victoria button {
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  background: #00ff88;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#pantalla-victoria button:hover {
+  background: #4dffab;
+}
