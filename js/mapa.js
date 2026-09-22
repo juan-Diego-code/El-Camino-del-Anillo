@@ -5,7 +5,7 @@
 //  T  árbol (sólido)   #  valla (sólido)
 //  ~  agua (sólido)    H  colina de casa hobbit (sólido)
 //  D  puerta de casa hobbit (sólido)
-const TILES_SOLIDOS = new Set(["#", "T", "~", "H", "D"]);
+const TILES_SOLIDOS = new Set(["#", "T", "~", "H", "D", "M"]);
 
 // ---------- RUIDO DETERMINISTA (mismo mapa y mismos detalles siempre) ----------
 function ruido(x, y) {
@@ -100,7 +100,8 @@ function crearMapaComarca() {
       { tipo: "jinete", x: 14 * T + T / 2, y: 9 * T + T / 2 },
       { tipo: "jinete", x: 21 * T + T / 2, y: 18 * T + T / 2 },
       { tipo: "jinete", x: 9 * T + T / 2, y: 11 * T + T / 2 },
-      { tipo: "jinete", x: 19 * T + T / 2, y: 6 * T + T / 2 }
+      { tipo: "jinete", x: 17 * T + T / 2, y: 20 * T + T / 2 },
+      { tipo: "jinete", x: 23 * T + T / 2, y: 9 * T + T / 2 }
     ],
     npcs: [
       {
@@ -123,9 +124,122 @@ function crearMapaComarca() {
   };
 }
 
-// una función generadora por zona (Moria y Mordor se agregan en la Fase 4)
+// ---------- CREAR EL MAPA DE LAS MINAS DE MORIA (34 x 22 tiles) ----------
+function crearMapaMoria() {
+  const cols = 34;
+  const filas = 22;
+  const T = TAMANO_TILE;
+
+  const tiles = [];
+  for (let y = 0; y < filas; y++) tiles.push(new Array(cols).fill("#"));
+
+  const poner = (x, y, c) => {
+    if (x >= 0 && x < cols && y >= 0 && y < filas) tiles[y][x] = c;
+  };
+  const rect = (x0, y0, x1, y1, c) => {
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) poner(x, y, c);
+  };
+
+  // sala de entrada y corredor hacia la sala central
+  rect(1, 8, 6, 13, ".");
+  rect(6, 10, 13, 12, ".");
+
+  // sala central con columnas de piedra
+  rect(13, 5, 23, 17, ".");
+  const columnas = [[15, 7], [15, 15], [21, 7], [21, 15]];
+  columnas.forEach(([x, y]) => poner(x, y, "M"));
+
+  // corredor y sala sur donde se esconde la llave
+  rect(16, 17, 19, 20, ".");
+  rect(12, 19, 22, 21, ".");
+
+  // corredor y sala este hacia la salida
+  rect(23, 9, 31, 11, ".");
+  rect(29, 7, 33, 13, ".");
+
+  // salida hacia Mordor (borde este)
+  poner(cols - 1, 9, "E");
+  poner(cols - 1, 10, "E");
+
+  return {
+    id: "moria",
+    cols: cols,
+    filas: filas,
+    tiles: tiles,
+    columnas: columnas,
+    ancho: cols * T,
+    alto: filas * T,
+    inicio: { x: 3 * T + T / 2, y: 10 * T + T / 2 },
+    salidas: [{ x: (cols - 1) * T, y: 9 * T, ancho: T, alto: 2 * T, destino: "mordor" }],
+    spawnsEnemigos: [
+      { tipo: "orco", x: 9 * T + T / 2, y: 11 * T + T / 2 },
+      { tipo: "orco", x: 16 * T + T / 2, y: 8 * T + T / 2 },
+      { tipo: "orco", x: 20 * T + T / 2, y: 14 * T + T / 2 },
+      { tipo: "orco", x: 14 * T + T / 2, y: 20 * T + T / 2 }
+    ],
+    objetos: [
+      { x: 18 * T + T / 2, y: 20 * T + T / 2, tipo: "llave" }
+    ]
+  };
+}
+
+// ---------- CREAR EL MAPA DE MORDOR (32 x 22 tiles) ----------
+function crearMapaMordor() {
+  const cols = 32;
+  const filas = 22;
+  const T = TAMANO_TILE;
+
+  const tiles = [];
+  for (let y = 0; y < filas; y++) tiles.push(new Array(cols).fill("#"));
+
+  const poner = (x, y, c) => {
+    if (x >= 0 && x < cols && y >= 0 && y < filas) tiles[y][x] = c;
+  };
+  const rect = (x0, y0, x1, y1, c) => {
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) poner(x, y, c);
+  };
+
+  // sala de entrada y corredor hacia la sala de lava
+  rect(1, 9, 6, 13, ".");
+  rect(6, 10, 12, 12, ".");
+
+  // sala con charcos de lava
+  rect(12, 6, 20, 16, ".");
+  rect(14, 8, 15, 9, "V");
+  rect(17, 13, 18, 14, "V");
+  rect(15, 13, 16, 14, "V");
+
+  // corredor hacia la Grieta del Destino
+  rect(20, 10, 26, 12, ".");
+
+  // cámara final: la Grieta del Destino
+  rect(24, 4, 30, 18, ".");
+  rect(26, 9, 27, 10, "V");
+
+  return {
+    id: "mordor",
+    cols: cols,
+    filas: filas,
+    tiles: tiles,
+    ancho: cols * T,
+    alto: filas * T,
+    inicio: { x: 3 * T + T / 2, y: 11 * T + T / 2 },
+    salidas: [],
+    spawnsEnemigos: [
+      { tipo: "orcoFuerte", x: 9 * T + T / 2, y: 11 * T + T / 2 },
+      { tipo: "orcoFuerte", x: 15 * T + T / 2, y: 10 * T + T / 2 },
+      { tipo: "orcoFuerte", x: 22 * T + T / 2, y: 11 * T + T / 2 },
+      { tipo: "orcoFuerte", x: 25 * T + T / 2, y: 8 * T + T / 2 },
+      { tipo: "ojo", x: 28 * T + T / 2, y: 11 * T + T / 2 }
+    ]
+  };
+}
+
+// una función generadora por zona
 const GENERADORES_DE_MAPA = {
-  comarca: crearMapaComarca
+  comarca: crearMapaComarca,
+  moria: crearMapaMoria,
+  mordor: crearMapaMordor
 };
 
 // ---------- DIBUJAR UN TILE ----------
@@ -144,7 +258,26 @@ function dibujarPasto(px, py, x, y) {
   }
 }
 
+// ---------- DIBUJAR UN TILE (según la zona actual) ----------
 function dibujarTile(c, px, py, x, y) {
+  if (zonaActual === "moria") return dibujarTileMoria(c, px, py, x, y);
+  if (zonaActual === "mordor") return dibujarTileMordor(c, px, py, x, y);
+  return dibujarTileComarca(c, px, py, x, y);
+}
+
+// ---------- INDICADOR DORADO DE SALIDA (compartido entre zonas) ----------
+function dibujarIndicadorSalida(px, py) {
+  const a = 0.35 + 0.25 * Math.sin(tiempo / 300);
+  ctx.fillStyle = "rgba(255, 210, 74, " + a + ")";
+  ctx.beginPath();
+  ctx.moveTo(px + 12, py + 10);
+  ctx.lineTo(px + 30, py + 20);
+  ctx.lineTo(px + 12, py + 30);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function dibujarTileComarca(c, px, py, x, y) {
   const T = TAMANO_TILE;
 
   if (c === "c" || c === "E") {
@@ -156,14 +289,7 @@ function dibujarTile(c, px, py, x, y) {
 
     if (c === "E") {
       // flecha dorada que late, indica la salida
-      const a = 0.35 + 0.25 * Math.sin(tiempo / 300);
-      ctx.fillStyle = "rgba(255, 210, 74, " + a + ")";
-      ctx.beginPath();
-      ctx.moveTo(px + 12, py + 10);
-      ctx.lineTo(px + 30, py + 20);
-      ctx.lineTo(px + 12, py + 30);
-      ctx.closePath();
-      ctx.fill();
+      dibujarIndicadorSalida(px, py);
     }
     return;
   }
@@ -241,6 +367,96 @@ function dibujarTile(c, px, py, x, y) {
   }
 }
 
+// ---------- DIBUJAR UN TILE DE MORIA (piedra oscura, columnas, antorchas) ----------
+function dibujarTileMoria(c, px, py, x, y) {
+  const T = TAMANO_TILE;
+
+  if (c === "M") {
+    // suelo de piedra debajo de la columna
+    ctx.fillStyle = ruido(x, y) > 0.5 ? "#2b2b33" : "#26262c";
+    ctx.fillRect(px, py, T, T);
+    ctx.fillStyle = "#55555f";
+    ctx.beginPath();
+    ctx.ellipse(px + T / 2, py + T / 2, T / 2.6, T / 2.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#8a8a96";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    return;
+  }
+
+  if (c === "#") {
+    ctx.fillStyle = "#141418";
+    ctx.fillRect(px, py, T, T);
+    ctx.strokeStyle = "#26262e";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px + 2, py + 2, T - 4, T - 4);
+    return;
+  }
+
+  // suelo de piedra
+  ctx.fillStyle = ruido(x * 3 + 1, y * 7 + 2) > 0.5 ? "#33333c" : "#2b2b33";
+  ctx.fillRect(px, py, T, T);
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.25)";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(px, py, T, T);
+
+  // antorcha ocasional que ilumina el corredor
+  if (ruido(x + 3, y + 11) > 0.94) {
+    ctx.fillStyle = "#5c3d1e";
+    ctx.fillRect(px + 18, py + 10, 4, 14);
+    const a = 0.6 + 0.3 * Math.sin(tiempo / 150 + x);
+    ctx.fillStyle = "rgba(255, 160, 60, " + a + ")";
+    ctx.beginPath();
+    ctx.arc(px + 20, py + 8, 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  if (c === "E") dibujarIndicadorSalida(px, py);
+}
+
+// ---------- DIBUJAR UN TILE DE MORDOR (roca negra y lava) ----------
+function dibujarTileMordor(c, px, py, x, y) {
+  const T = TAMANO_TILE;
+
+  if (c === "#") {
+    ctx.fillStyle = "#1a0e0e";
+    ctx.fillRect(px, py, T, T);
+    ctx.strokeStyle = "#2e1414";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px + 2, py + 2, T - 4, T - 4);
+    return;
+  }
+
+  if (c === "V") {
+    // lava: hace daño al pisarla
+    const a = 0.7 + 0.3 * Math.sin(tiempo / 250 + x * 0.6 + y);
+    ctx.fillStyle = "#2a0d0d";
+    ctx.fillRect(px, py, T, T);
+    ctx.fillStyle = "rgba(255, 90, 20, " + a + ")";
+    ctx.beginPath();
+    ctx.ellipse(px + T / 2, py + T / 2, T / 2.3, T / 2.6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(255, 200, 60, 0.5)";
+    ctx.beginPath();
+    ctx.arc(px + T / 2, py + T / 2, 4, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
+
+  // roca negra del suelo
+  ctx.fillStyle = ruido(x * 3 + 1, y * 7 + 2) > 0.5 ? "#241414" : "#1e1010";
+  ctx.fillRect(px, py, T, T);
+  if (ruido(x + 6, y + 2) > 0.92) {
+    ctx.fillStyle = "#3a2020";
+    ctx.beginPath();
+    ctx.arc(px + 12 + ruido(x, y) * 12, py + 12 + ruido(y, x) * 12, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  if (c === "E") dibujarIndicadorSalida(px, py);
+}
+
 // ---------- DIBUJAR UNA CASA HOBBIT (colina redonda con puerta) ----------
 function dibujarCasa(c) {
   const T = TAMANO_TILE;
@@ -296,5 +512,5 @@ function dibujarMapa() {
       dibujarTile(m.tiles[y][x], x * T, y * T, x, y);
     }
   }
-  m.casas.forEach(dibujarCasa);
+  m.casas && m.casas.forEach(dibujarCasa);
 }

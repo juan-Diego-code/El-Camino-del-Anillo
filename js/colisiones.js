@@ -56,5 +56,8 @@ function detectarColisiones() {
     }
   }
 
-  // Fase 4: lava de Mordor y jefe final
+  // lava de Mordor: quema al Portador si se para sobre ella
+  if (tileEn(jugador.x, jugador.y) === "V") {
+    danarJugador(1, { x: 0, y: 0 }); // danarJugador ya respeta la invulnerabilidad temporal
+  }
 }

@@ -3,7 +3,9 @@ const FUENTE = "Georgia, 'Times New Roman', serif";
 
 // ---------- MISIONES POR ZONA ----------
 const MISIONES = {
-  comarca: { descripcion: "Derrota a los Jinetes Negros", tipo: "derrotar", objetivoTipo: "jinete", meta: 5 }
+  comarca: { descripcion: "Derrota a los Jinetes Negros", tipo: "derrotar", objetivoTipo: "jinete", meta: 5 },
+  moria: { descripcion: "Encuentra la llave de Moria", tipo: "recolectar", objetivoTipo: "llave", meta: 1 },
+  mordor: { descripcion: "Derrota al Ojo de Sauron", tipo: "derrotar", objetivoTipo: "ojo", meta: 1 }
 };
 
 let mision = null;
@@ -44,6 +46,7 @@ function cargarZona(id) {
   objetosSuelo.length = 0;
   flechasJugador.length = 0;
   (mapaActual.spawnsEnemigos || []).forEach((s) => crearEnemigo(s.tipo, s.x, s.y));
+  (mapaActual.objetos || []).forEach((o) => objetosSuelo.push({ ...o }));
 
   cargarNpcsDeZona();
   iniciarMision(id);
@@ -232,7 +235,9 @@ function dibujarHUD() {
 
   ctx.fillStyle = "#cfd8dc";
   ctx.font = "14px " + FUENTE;
-  ctx.fillText("Flechas: " + jugador.flechas + "   Pociones: " + jugador.pociones, 20, 98);
+  let linea3 = "Flechas: " + jugador.flechas + "   Pociones: " + jugador.pociones;
+  if (jugador.llaves > 0) linea3 += "   Llaves: " + jugador.llaves;
+  ctx.fillText(linea3, 20, 98);
 
   // nivel y barra de experiencia
   ctx.fillStyle = "#e8dcc0";
