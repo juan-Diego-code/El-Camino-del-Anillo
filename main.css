@@ -26,7 +26,7 @@ canvas {
   border: 2px solid #ffd24a;
 }
 
-/* ---------- PANTALLAS (menú, game over y victoria comparten base) ---------- */
+/* PANTALLAS (menú, game over y victoria comparten base)  */
 #menu-inicio,
 #pantalla-gameover,
 #pantalla-victoria {
@@ -59,7 +59,7 @@ canvas {
   transition: background 0.2s ease;
 }
 
-/* ---------- MENÚ DE INICIO (dorado y rojo de Mordor) ---------- */
+/*  MENÚ DE INICIO (dorado y rojo de Mordor)  */
 #menu-inicio {
   border: 2px solid #ffd24a;
 }
@@ -93,7 +93,7 @@ canvas {
   background: #ffe28a;
 }
 
-/* ---------- PANTALLA DE GAME OVER (rojo) ---------- */
+/*  PANTALLA DE GAME OVER (rojo)  */
 #pantalla-gameover {
   border: 2px solid #d92b1f;
 }
@@ -124,7 +124,7 @@ canvas {
   display: none !important;
 }
 
-/* ---------- PANTALLA DE VICTORIA (verde de la Comarca) ---------- */
+/*  PANTALLA DE VICTORIA (verde de la Comarca)  */
 #pantalla-victoria {
   border: 2px solid #7ddc5a;
 }

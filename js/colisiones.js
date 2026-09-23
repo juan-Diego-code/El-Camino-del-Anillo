@@ -1,12 +1,12 @@
-// ---------- DISTANCIA ENTRE DOS PUNTOS ----------
+// DISTANCIA ENTRE DOS PUNTOS 
 function distancia(x1, y1, x2, y2) {
   return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
-// ---------- ESTADO DEL JUEGO ----------
+// ESTADO DEL JUEGO 
 let juegoTerminado = false;
 
-// ---------- QUÉ TILE HAY EN UN PUNTO DEL MAPA ----------
+// QUÉ TILE HAY EN UN PUNTO DEL MAPA 
 // fuera del mapa cuenta como muro
 function tileEn(px, py) {
   const x = Math.floor(px / TAMANO_TILE);
@@ -15,7 +15,7 @@ function tileEn(px, py) {
   return mapaActual.tiles[y][x];
 }
 
-// ---------- ¿UNA CAJA CENTRADA EN (cx, cy) CHOCA CON ALGÚN TILE SÓLIDO? ----------
+//  ¿UNA CAJA CENTRADA EN (cx, cy) CHOCA CON ALGÚN TILE SÓLIDO?
 // la caja es más chica que un tile, así que basta revisar sus 4 esquinas
 function chocaConMapa(cx, cy, w, h) {
   const x0 = cx - w / 2;
@@ -31,7 +31,7 @@ function chocaConMapa(cx, cy, w, h) {
   );
 }
 
-// ---------- DETECTAR TODAS LAS COLISIONES ----------
+//  DETECTAR TODAS LAS COLISIONES 
 function detectarColisiones() {
   if (juegoTerminado) return;
 

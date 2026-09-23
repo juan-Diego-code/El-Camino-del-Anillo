@@ -1,4 +1,4 @@
-// ---------- LEYENDA DE TILES ----------
+// LEYENDA DE TILES
 //  .  pasto            f  pasto con flores
 //  c  camino           p  puente de madera
 //  E  salida de zona   F  campo de cultivo
@@ -14,7 +14,7 @@ function ruido(x, y) {
   return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
 }
 
-// ---------- MAPA ACTUAL Y CÁMARA ----------
+// MAPA ACTUAL Y CAMARA
 let mapaActual = null;
 const camara = { x: 0, y: 0 };
 
@@ -23,7 +23,7 @@ function actualizarCamara() {
   camara.y = limitar(jugador.y - canvas.height / 2, 0, mapaActual.alto - canvas.height);
 }
 
-// ---------- CREAR EL MAPA DE LA COMARCA (40 x 30 tiles) ----------
+// CREAR EL MAPA DE LA COMARCA (40 x 30 tiles)
 function crearMapaComarca() {
   const cols = 40;
   const filas = 30;
@@ -124,7 +124,7 @@ function crearMapaComarca() {
   };
 }
 
-// ---------- CREAR EL MAPA DE LAS MINAS DE MORIA (34 x 22 tiles) ----------
+// CREAR EL MAPA DE LAS MINAS DE MORIA (34 x 22 tiles) 
 function crearMapaMoria() {
   const cols = 34;
   const filas = 22;
@@ -183,7 +183,7 @@ function crearMapaMoria() {
   };
 }
 
-// ---------- CREAR EL MAPA DE MORDOR (32 x 22 tiles) ----------
+//  CREAR EL MAPA DE MORDOR (32 x 22 tiles) 
 function crearMapaMordor() {
   const cols = 32;
   const filas = 22;
@@ -242,7 +242,7 @@ const GENERADORES_DE_MAPA = {
   mordor: crearMapaMordor
 };
 
-// ---------- DIBUJAR UN TILE ----------
+// DIBUJAR UN TILE 
 function dibujarPasto(px, py, x, y) {
   const T = TAMANO_TILE;
   ctx.fillStyle = ruido(x * 3 + 1, y * 7 + 2) > 0.5 ? "#2f6b3a" : "#2b6435";
@@ -258,14 +258,14 @@ function dibujarPasto(px, py, x, y) {
   }
 }
 
-// ---------- DIBUJAR UN TILE (según la zona actual) ----------
+//  DIBUJAR UN TILE (según la zona actual) 
 function dibujarTile(c, px, py, x, y) {
   if (zonaActual === "moria") return dibujarTileMoria(c, px, py, x, y);
   if (zonaActual === "mordor") return dibujarTileMordor(c, px, py, x, y);
   return dibujarTileComarca(c, px, py, x, y);
 }
 
-// ---------- INDICADOR DORADO DE SALIDA (compartido entre zonas) ----------
+//  INDICADOR DORADO DE SALIDA (compartido entre zonas) 
 function dibujarIndicadorSalida(px, py) {
   const a = 0.35 + 0.25 * Math.sin(tiempo / 300);
   ctx.fillStyle = "rgba(255, 210, 74, " + a + ")";
@@ -367,7 +367,7 @@ function dibujarTileComarca(c, px, py, x, y) {
   }
 }
 
-// ---------- DIBUJAR UN TILE DE MORIA (piedra oscura, columnas, antorchas) ----------
+//  DIBUJAR UN TILE DE MORIA (piedra oscura, columnas, antorchas) 
 function dibujarTileMoria(c, px, py, x, y) {
   const T = TAMANO_TILE;
 
@@ -415,7 +415,7 @@ function dibujarTileMoria(c, px, py, x, y) {
   if (c === "E") dibujarIndicadorSalida(px, py);
 }
 
-// ---------- DIBUJAR UN TILE DE MORDOR (roca negra y lava) ----------
+//  DIBUJAR UN TILE DE MORDOR (roca negra y lava) 
 function dibujarTileMordor(c, px, py, x, y) {
   const T = TAMANO_TILE;
 
@@ -457,7 +457,7 @@ function dibujarTileMordor(c, px, py, x, y) {
   if (c === "E") dibujarIndicadorSalida(px, py);
 }
 
-// ---------- DIBUJAR UNA CASA HOBBIT (colina redonda con puerta) ----------
+//  DIBUJAR UNA CASA HOBBIT (colina redonda con puerta) 
 function dibujarCasa(c) {
   const T = TAMANO_TILE;
   const cx = (c.x + 1.5) * T;

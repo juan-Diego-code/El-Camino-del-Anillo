@@ -1,4 +1,4 @@
-// ---------- OBJETO JUGADOR (el Portador del Anillo) ----------
+//  OBJETO JUGADOR (el Portador del Anillo) 
 // x, y = centro del personaje en píxeles del mapa
 const jugador = {
   x: 0,
@@ -24,7 +24,7 @@ const jugador = {
   knockY: 0
 };
 
-// ---------- COLOCAR AL JUGADOR EN EL INICIO DE LA ZONA ----------
+//  COLOCAR AL JUGADOR EN EL INICIO DE LA ZONA 
 function colocarJugadorEnInicio() {
   jugador.x = mapaActual.inicio.x;
   jugador.y = mapaActual.inicio.y;
@@ -34,7 +34,7 @@ function colocarJugadorEnInicio() {
   jugador.knockY = 0;
 }
 
-// ---------- RECIBIR DAÑO (con invulnerabilidad breve y knockback) ----------
+//  RECIBIR DAÑO (con invulnerabilidad breve y knockback) 
 function danarJugador(dano, dir) {
   if (juegoTerminado || tiempo < jugador.invulnerableHasta) return;
 
@@ -51,7 +51,7 @@ function danarJugador(dano, dir) {
   }
 }
 
-// ---------- GANAR EXPERIENCIA Y SUBIR DE NIVEL ----------
+//  GANAR EXPERIENCIA Y SUBIR DE NIVEL 
 function subirNivelSiCorresponde() {
   while (jugador.xp >= jugador.xpSiguienteNivel) {
     jugador.xp -= jugador.xpSiguienteNivel;
@@ -64,7 +64,7 @@ function subirNivelSiCorresponde() {
   }
 }
 
-// ---------- ACTUALIZAR JUGADOR (dt = 1 equivale a un frame a 60 fps) ----------
+//  ACTUALIZAR JUGADOR (dt = 1 equivale a un frame a 60 fps) 
 function actualizarJugador(dt) {
   // mientras hay un diálogo en curso, el jugador no se mueve
   if (dialogoActivo) {
@@ -118,7 +118,7 @@ function actualizarJugador(dt) {
   jugador.animacion += dt;
 }
 
-// ---------- VECTOR UNITARIO SEGÚN LA DIRECCIÓN DEL JUGADOR ----------
+//  VECTOR UNITARIO SEGÚN LA DIRECCIÓN DEL JUGADOR 
 function vectorDireccion(dir) {
   if (dir === "arriba") return { x: 0, y: -1 };
   if (dir === "abajo") return { x: 0, y: 1 };
@@ -126,7 +126,7 @@ function vectorDireccion(dir) {
   return { x: 1, y: 0 };
 }
 
-// ---------- DIBUJAR JUGADOR ----------
+//  DIBUJAR JUGADOR 
 function dibujarJugador() {
   // parpadeo mientras es invulnerable
   if (tiempo < jugador.invulnerableHasta && Math.floor(tiempo / 80) % 2 === 0) return;

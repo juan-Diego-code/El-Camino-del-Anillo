@@ -1,18 +1,18 @@
-// ---------- NPCs DE LA ZONA ACTUAL ----------
+//  NPCs DE LA ZONA ACTUAL 
 let npcs = [];
 
-// ---------- ESTADO DEL DIÁLOGO ACTIVO ----------
+//  ESTADO DEL DIÁLOGO ACTIVO 
 // null cuando no hay diálogo en curso
 let dialogoActivo = null;
 const VELOCIDAD_TEXTO = 28; // ms por letra
 
-// ---------- CARGAR LOS NPCs DEFINIDOS EN EL MAPA DE LA ZONA ----------
+//  CARGAR LOS NPCs DEFINIDOS EN EL MAPA DE LA ZONA 
 function cargarNpcsDeZona() {
   npcs = (mapaActual.npcs || []).map((n) => ({ ...n }));
   dialogoActivo = null;
 }
 
-// ---------- BUSCAR UN NPC CERCA DEL JUGADOR ----------
+//  BUSCAR UN NPC CERCA DEL JUGADOR 
 function npcCercano() {
   let mejor = null;
   let mejorDist = 44;
@@ -23,7 +23,7 @@ function npcCercano() {
   return mejor;
 }
 
-// ---------- INICIAR UN DIÁLOGO CON UN NPC ----------
+// INICIAR UN DIÁLOGO CON UN NPC 
 function iniciarDialogo(npc) {
   dialogoActivo = {
     npc,
@@ -34,7 +34,7 @@ function iniciarDialogo(npc) {
   };
 }
 
-// ---------- REVELAR EL TEXTO LETRA POR LETRA ----------
+//  REVELAR EL TEXTO LETRA POR LETRA 
 function actualizarDialogo() {
   if (!dialogoActivo) return;
   const linea = dialogoActivo.npc.lineas[dialogoActivo.indiceLinea];
@@ -49,7 +49,7 @@ function actualizarDialogo() {
   }
 }
 
-// ---------- AVANZAR EL DIÁLOGO (tecla E) ----------
+//  AVANZAR EL DIÁLOGO (tecla E) 
 function avanzarDialogo() {
   if (!dialogoActivo) return;
   const linea = dialogoActivo.npc.lineas[dialogoActivo.indiceLinea];
@@ -71,7 +71,7 @@ function avanzarDialogo() {
   }
 }
 
-// ---------- TECLA E: hablar con un NPC cercano o avanzar el diálogo ----------
+//  TECLA E: hablar con un NPC cercano o avanzar el diálogo 
 document.addEventListener("keydown", (e) => {
   if (juegoTerminado) return;
   if (e.key.toLowerCase() === "e" && !e.repeat) {
@@ -84,7 +84,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// ---------- DIBUJAR LOS NPCs (figura simple con túnica y capucha) ----------
+//  DIBUJAR LOS NPCs (figura simple con túnica y capucha) 
 function dibujarNPCs() {
   npcs.forEach((n) => {
     ctx.save();
@@ -125,7 +125,7 @@ function dibujarNPCs() {
   });
 }
 
-// ---------- DIBUJAR EL CUADRO DE DIÁLOGO ----------
+//  DIBUJAR EL CUADRO DE DIÁLOGO 
 function dibujarCuadroDialogo() {
   if (!dialogoActivo) return;
 

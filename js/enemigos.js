@@ -1,4 +1,4 @@
-// ---------- TIPOS DE ENEMIGO ----------
+//  TIPOS DE ENEMIGO 
 const TIPOS_ENEMIGO = {
   jinete:     { vida: 4,  dano: 1, velocidad: 1.4, tamano: 30, color: "#2a2a33", detectar: 150 },
   orco:       { vida: 6,  dano: 1, velocidad: 1.7, tamano: 28, color: "#3d4a2f", detectar: 130 },
@@ -12,11 +12,11 @@ const OJO_PULSO_INTERVALO = 2400;
 const OJO_PULSO_DURACION = 500;
 const OJO_PULSO_RADIO_MAX = 130;
 
-// ---------- ARREGLOS DE ENEMIGOS Y OBJETOS EN EL SUELO ----------
+//  ARREGLOS DE ENEMIGOS Y OBJETOS EN EL SUELO 
 const enemigos = [];
 const objetosSuelo = [];
 
-// ---------- CREAR UN ENEMIGO ----------
+//  CREAR UN ENEMIGO 
 function crearEnemigo(tipo, x, y) {
   const base = TIPOS_ENEMIGO[tipo];
   enemigos.push({
@@ -39,7 +39,7 @@ function crearEnemigo(tipo, x, y) {
   });
 }
 
-// ---------- APLICAR DAÑO A UN ENEMIGO (desde espada o flecha) ----------
+//  APLICAR DAÑO A UN ENEMIGO (desde espada o flecha) 
 function danarEnemigo(en, dano, dir) {
   en.vida -= dano;
   en.flashHasta = tiempo + 120;
@@ -68,7 +68,7 @@ function danarEnemigo(en, dano, dir) {
   }
 }
 
-// ---------- ACTUALIZAR EL OJO DE SAURON (inmóvil, ataca con pulsos de energía) ----------
+// ACTUALIZAR EL OJO DE SAURON (inmóvil, ataca con pulsos de energía)
 function actualizarOjo(en) {
   en.knockX = 0;
   en.knockY = 0; // es demasiado masivo para retroceder
@@ -99,7 +99,7 @@ function actualizarOjo(en) {
   }
 }
 
-// ---------- ACTUALIZAR ENEMIGOS (patrulla, persecución y contacto) ----------
+//  ACTUALIZAR ENEMIGOS (patrulla, persecución y contacto) 
 function actualizarEnemigos(dt) {
   for (let i = enemigos.length - 1; i >= 0; i--) {
     const en = enemigos[i];
@@ -160,8 +160,8 @@ function actualizarEnemigos(dt) {
   }
 }
 
-// ---------- DIBUJAR ENEMIGOS ----------
-// ---------- DIBUJAR EL OJO DE SAURON (resplandor, iris llameante y pulso) ----------
+//  DIBUJAR ENEMIGOS 
+//  DIBUJAR EL OJO DE SAURON (resplandor, iris llameante y pulso) 
 function dibujarOjo(en) {
   ctx.save();
   ctx.translate(en.x, en.y);
@@ -264,7 +264,7 @@ function dibujarEnemigos() {
   });
 }
 
-// ---------- ACTUALIZAR OBJETOS EN EL SUELO (recogida de flechas) ----------
+// ACTUALIZAR OBJETOS EN EL SUELO (recogida de flechas) 
 function actualizarObjetosSuelo() {
   for (let i = objetosSuelo.length - 1; i >= 0; i--) {
     const o = objetosSuelo[i];
@@ -285,7 +285,7 @@ function actualizarObjetosSuelo() {
   }
 }
 
-// ---------- DIBUJAR OBJETOS EN EL SUELO ----------
+//  DIBUJAR OBJETOS EN EL SUELO 
 function dibujarObjetosSuelo() {
   objetosSuelo.forEach((o) => {
     ctx.save();

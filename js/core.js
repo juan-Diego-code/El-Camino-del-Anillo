@@ -1,11 +1,11 @@
-// ---------- CONFIGURACIÓN DEL CANVAS ----------
+// CONFIGURACIÓN DEL CANVAS 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 // tamaño de cada casilla del mapa, en píxeles (800 x 600 = 20 x 15 tiles en pantalla)
 const TAMANO_TILE = 40;
 
-// ---------- TECLAS PRESIONADAS ----------
+// TECLAS PRESIONADAS 
 // se guardan en minúsculas: "arrowup", "w", "a", " ", "x", "e"...
 const teclas = {};
 const TECLAS_DEL_JUEGO = ["arrowup", "arrowdown", "arrowleft", "arrowright", " "];
@@ -26,18 +26,18 @@ window.addEventListener("blur", () => {
   for (const k in teclas) teclas[k] = false;
 });
 
-// ---------- PUNTAJE ----------
+// PUNTAJE
 let puntos = 0;
 
-// ---------- TIEMPO (lo actualiza el game loop, en milisegundos) ----------
+// TIEMPO (lo actualiza el game loop, en milisegundos)
 let tiempo = 0;
 
-// ---------- UTILIDADES ----------
+// UTILIDADES
 function limitar(valor, min, max) {
   return Math.max(min, Math.min(max, valor));
 }
 
-// ---------- ZONAS ----------
+// ZONAS
 let zonaActual = "comarca";
 
 const ZONAS = {

@@ -1,7 +1,7 @@
-// ---------- FUENTE DEL JUEGO ----------
+//  FUENTE DEL JUEGO 
 const FUENTE = "Georgia, 'Times New Roman', serif";
 
-// ---------- MISIONES POR ZONA ----------
+//  MISIONES POR ZONA 
 const MISIONES = {
   comarca: { descripcion: "Derrota a los Jinetes Negros", tipo: "derrotar", objetivoTipo: "jinete", meta: 5 },
   moria: { descripcion: "Encuentra la llave de Moria", tipo: "recolectar", objetivoTipo: "llave", meta: 1 },
@@ -34,7 +34,7 @@ function avanzarMision(tipoEvento, dato) {
   }
 }
 
-// ---------- CARGAR UNA ZONA ----------
+//  CARGAR UNA ZONA 
 function cargarZona(id) {
   zonaActual = id;
   mapaActual = GENERADORES_DE_MAPA[id]();
@@ -52,7 +52,7 @@ function cargarZona(id) {
   iniciarMision(id);
 }
 
-// ---------- INICIAR / REINICIAR PARTIDA ----------
+//  INICIAR / REINICIAR PARTIDA 
 function iniciarPartida() {
   puntos = 0;
   juegoTerminado = false;
@@ -68,7 +68,7 @@ function iniciarPartida() {
   mostrarBanner();
 }
 
-// ---------- MENÚ DE INICIO ----------
+//  MENÚ DE INICIO 
 const menuInicio = document.getElementById("menu-inicio");
 const btnJugar = document.getElementById("btn-jugar");
 
@@ -78,7 +78,7 @@ btnJugar.addEventListener("click", () => {
   requestAnimationFrame(gameLoop);
 });
 
-// ---------- PANTALLA DE GAME OVER ----------
+//  PANTALLA DE GAME OVER 
 const pantallaGameOver = document.getElementById("pantalla-gameover");
 const puntajeFinal = document.getElementById("puntaje-final");
 const btnReiniciar = document.getElementById("btn-reiniciar");
@@ -94,7 +94,7 @@ btnReiniciar.addEventListener("click", () => {
   iniciarPartida();
 });
 
-// ---------- PANTALLA DE VICTORIA ----------
+//  PANTALLA DE VICTORIA 
 const pantallaVictoria = document.getElementById("pantalla-victoria");
 const puntajeVictoria = document.getElementById("puntaje-victoria");
 const btnReiniciarVictoria = document.getElementById("btn-reiniciar-victoria");
@@ -110,7 +110,7 @@ btnReiniciarVictoria.addEventListener("click", () => {
   iniciarPartida();
 });
 
-// ---------- MENSAJE TEMPORAL (cuadro en la parte baja de la pantalla) ----------
+//  MENSAJE TEMPORAL (cuadro en la parte baja de la pantalla) 
 const mensaje = { texto: "", hasta: 0 };
 
 function mostrarMensaje(texto, ms = 2200) {
@@ -139,7 +139,7 @@ function dibujarMensaje() {
   ctx.textAlign = "left";
 }
 
-// ---------- BANNER AL ENTRAR EN UNA ZONA (solo visual) ----------
+//  BANNER AL ENTRAR EN UNA ZONA (solo visual) 
 const BANNER_DURACION = 2500; // milisegundos
 let bannerHasta = 0;
 
@@ -170,7 +170,7 @@ function dibujarBanner() {
   ctx.textAlign = "left";
 }
 
-// ---------- HUD ----------
+//  HUD 
 function trazarCorazon(x, y, s) {
   ctx.beginPath();
   ctx.moveTo(x + s / 2, y + s * 0.9);
@@ -255,7 +255,7 @@ function dibujarHUD() {
   ctx.strokeRect(20, 126, bw, bh);
 }
 
-// ---------- DIBUJAR TODA LA ESCENA ----------
+// DIBUJAR TODA LA ESCENA 
 function dibujarEscena() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -279,7 +279,7 @@ function dibujarEscena() {
   dibujarCuadroDialogo();
 }
 
-// ---------- GAME LOOP ----------
+//  GAME LOOP 
 let ultimoTiempo = 0;
 
 function gameLoop(ahora) {
@@ -303,6 +303,6 @@ function gameLoop(ahora) {
   requestAnimationFrame(gameLoop);
 }
 
-// ---------- ESCENA INICIAL (se ve detrás del menú) ----------
+//  ESCENA INICIAL (se ve detrás del menú) 
 cargarZona("comarca");
 dibujarEscena();

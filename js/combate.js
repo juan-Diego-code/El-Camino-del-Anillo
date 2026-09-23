@@ -1,4 +1,4 @@
-// ---------- PARÁMETROS DE COMBATE ----------
+//  PARÁMETROS DE COMBATE 
 const ESPADA_COOLDOWN = 380; // ms entre golpes
 const ESPADA_ALCANCE = 28;   // distancia del centro del golpe respecto al jugador
 const ESPADA_RADIO = 22;     // radio de impacto del golpe
@@ -15,10 +15,10 @@ jugador.cooldownEspada = 0;
 jugador.cooldownFlecha = 0;
 jugador.ataqueHasta = 0;
 
-// ---------- ARREGLO DE FLECHAS DISPARADAS POR EL JUGADOR ----------
+//  ARREGLO DE FLECHAS DISPARADAS POR EL JUGADOR 
 const flechasJugador = [];
 
-// ---------- ATAQUE CUERPO A CUERPO CON LA ESPADA ----------
+//  ATAQUE CUERPO A CUERPO CON LA ESPADA 
 function atacarEspada() {
   if (tiempo < jugador.cooldownEspada) return;
   jugador.cooldownEspada = tiempo + ESPADA_COOLDOWN;
@@ -36,7 +36,7 @@ function atacarEspada() {
   });
 }
 
-// ---------- DISPARO DE FLECHA ÉLFICA ----------
+//  DISPARO DE FLECHA ÉLFICA 
 function dispararFlechaJugador() {
   if (tiempo < jugador.cooldownFlecha) return;
   if (jugador.flechas <= 0) {
@@ -57,7 +57,7 @@ function dispararFlechaJugador() {
   });
 }
 
-// ---------- USAR UNA POCIÓN DE CURACIÓN (tecla Q) ----------
+//  USAR UNA POCIÓN DE CURACIÓN (tecla Q) 
 function usarPocion() {
   if (jugador.pociones <= 0) {
     mostrarMensaje("No tienes pociones");
@@ -72,7 +72,7 @@ function usarPocion() {
   mostrarMensaje("Bebes una poción y recuperas un corazón");
 }
 
-// ---------- TECLAS DE COMBATE (espacio = espada, X = flecha, Q = poción) ----------
+//  TECLAS DE COMBATE (espacio = espada, X = flecha, Q = poción) 
 document.addEventListener("keydown", (e) => {
   if (juegoTerminado || dialogoActivo) return;
   if (e.code === "Space" && !e.repeat) atacarEspada();
@@ -80,7 +80,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key.toLowerCase() === "q" && !e.repeat) usarPocion();
 });
 
-// ---------- ACTUALIZAR FLECHAS DEL JUGADOR ----------
+//  ACTUALIZAR FLECHAS DEL JUGADOR 
 function actualizarFlechasJugador(dt) {
   for (let i = flechasJugador.length - 1; i >= 0; i--) {
     const f = flechasJugador[i];
@@ -112,7 +112,7 @@ function actualizarFlechasJugador(dt) {
   }
 }
 
-// ---------- DIBUJAR FLECHAS DEL JUGADOR ----------
+// DIBUJAR FLECHAS DEL JUGADOR 
 function dibujarFlechasJugador() {
   flechasJugador.forEach((f) => {
     const ang = Math.atan2(f.vx, -f.vy);
@@ -138,7 +138,7 @@ function dibujarFlechasJugador() {
   });
 }
 
-// ---------- DIBUJAR EL ARCO DE LA ESPADA (mientras dura el golpe) ----------
+//  DIBUJAR EL ARCO DE LA ESPADA (mientras dura el golpe) 
 function dibujarEspada() {
   if (tiempo >= jugador.ataqueHasta) return;
 
