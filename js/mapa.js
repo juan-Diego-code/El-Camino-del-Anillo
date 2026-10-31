@@ -17,7 +17,7 @@ function ruido(x, y) {
 // MAPA ACTUAL Y CAMARA
 let mapaActual = null;
 const camara = { x: 0, y: 0 };
-
+//centrarse en el jugador, se usa limitar() para no mostrar fuera del mapa
 function actualizarCamara() {
   camara.x = limitar(jugador.x - canvas.width / 2, 0, mapaActual.ancho - canvas.width);
   camara.y = limitar(jugador.y - canvas.height / 2, 0, mapaActual.alto - canvas.height);

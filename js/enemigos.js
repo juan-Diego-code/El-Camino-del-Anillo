@@ -21,13 +21,13 @@ function crearEnemigo(tipo, x, y) {
   const base = TIPOS_ENEMIGO[tipo];
   enemigos.push({
     tipo, x, y,
-    vida: base.vida,
-    vidaMax: base.vida,
-    dano: base.dano,
-    velocidad: base.velocidad,
-    tamano: base.tamano,
-    color: base.color,
-    detectar: base.detectar,
+    vida: base.vida,  //vida base
+    vidaMax: base.vida, //vida maxima
+    dano: base.dano, //daño
+    velocidad: base.velocidad, //velocidad
+    tamano: base.tamano, //tamaño
+    color: base.color, //color
+    detectar: base.detectar, //detectar jugador
     dirPatrulla: Math.random() * Math.PI * 2,
     cambioPatrulla: 0,
     knockX: 0,
@@ -41,7 +41,7 @@ function crearEnemigo(tipo, x, y) {
 
 //  APLICAR DAÑO A UN ENEMIGO (desde espada o flecha) 
 function danarEnemigo(en, dano, dir) {
-  en.vida -= dano;
+  en.vida -= dano; //restar vida
   en.flashHasta = tiempo + 120;
 
   const largo = Math.hypot(dir.x, dir.y) || 1;
@@ -71,7 +71,7 @@ function danarEnemigo(en, dano, dir) {
 // ACTUALIZAR EL OJO DE SAURON (inmóvil, ataca con pulsos de energía)
 function actualizarOjo(en) {
   en.knockX = 0;
-  en.knockY = 0; // es demasiado masivo para retroceder
+  en.knockY = 0; // no retrocede ni se mueve, solo ataca con pulsos de energía
 
   if (tiempo >= en.pulsoHasta) {
     en.pulsoHasta = tiempo + OJO_PULSO_INTERVALO;

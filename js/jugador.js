@@ -3,20 +3,20 @@
 const jugador = {
   x: 0,
   y: 0,
-  ancho: 24,          // tamaño de la caja de colisión
+  ancho: 24,          // tamaño de la hitbox
   alto: 24,
   velocidad: 3,       // píxeles por frame (a 60 fps)
   direccion: "abajo", // "arriba" | "abajo" | "izquierda" | "derecha"
   caminando: false,
   animacion: 0,
-  vida: 6,            // en medios corazones: 6 = 3 corazones
+  vida: 6,            // en medios corazones: 6 medios = 3 corazones
   vidaMax: 6,
   flechas: 5,
   flechasMax: 20,
   pociones: 0,
   llaves: 0,
-  nivel: 1,
-  xp: 0,
+  nivel: 1,  // Nivel de juego 1
+  xp: 0,  //Nivel inicial 1, xp = 0
   xpSiguienteNivel: 20,
   danoExtra: 0,
   invulnerableHasta: 0,
@@ -45,6 +45,7 @@ function danarJugador(dano, dir) {
   jugador.knockX = (dir.x / largo) * 5;
   jugador.knockY = (dir.y / largo) * 5;
 
+  //si la vida llega a 0 muestra pantalla de game over
   if (jugador.vida <= 0) {
     jugador.vida = 0;
     mostrarPantallaGameOver();
@@ -54,13 +55,13 @@ function danarJugador(dano, dir) {
 //  GANAR EXPERIENCIA Y SUBIR DE NIVEL 
 function subirNivelSiCorresponde() {
   while (jugador.xp >= jugador.xpSiguienteNivel) {
-    jugador.xp -= jugador.xpSiguienteNivel;
-    jugador.nivel++;
-    jugador.xpSiguienteNivel = Math.round(jugador.xpSiguienteNivel * 1.4);
+    jugador.xp -= jugador.xpSiguienteNivel; //restar la xp necesaria para subir de nivel
+    jugador.nivel++; //siguiente nivel
+    jugador.xpSiguienteNivel = Math.round(jugador.xpSiguienteNivel * 1.4); //xp necesaria para el siguiente nivel
     jugador.vidaMax += 2;
-    jugador.vida = jugador.vidaMax;
-    jugador.danoExtra++;
-    mostrarMensaje("¡Subiste a nivel " + jugador.nivel + "! Vida y daño aumentados.");
+    jugador.vida = jugador.vidaMax; //agregar mas vida
+    jugador.danoExtra++; //agragar mas daño
+    mostrarMensaje("¡Subiste a nivel " + jugador.nivel + "! Vida y daño aumentados."); //mensaje al subir de nivel
   }
 }
 
