@@ -9,11 +9,11 @@ for (var _x = 0; _x < room_width; _x += _size) {
     instance_create_layer(_x, _floor_y, "Instances", obj_solid);
 }
 
-// Jugador de prueba: aparece en el aire, sobre el suelo
-instance_create_layer(room_width / 2, _floor_y - 256, "Instances", obj_player);
+// Jugador de prueba: aparece un poco por encima del suelo
+instance_create_layer(room_width / 2, _floor_y - 100, "Instances", obj_player);
 
 // Enemigo de prueba: a la derecha del jugador, apoyado en el suelo
-instance_create_layer(room_width / 2 + 300, _floor_y - sprite_get_height(spr_enemy_walker), "Instances", obj_enemy_walker);
+instance_create_layer(room_width / 2 + 200, _floor_y - sprite_get_height(spr_enemy_walker), "Instances", obj_enemy_walker);
 
-// Cámara
+// Cámara (se crea al final, para que ya exista el jugador)
 instance_create_layer(0, 0, "Instances", obj_camera);
