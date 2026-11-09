@@ -10,6 +10,7 @@ vsp = 0;              // velocidad vertical actual
 facing = 1;           // hacia dónde mira: 1 = derecha, -1 = izquierda
 
 // --- Ataque con espada ---
+attack_damage = 1;          // daño de cada golpe
 attack_duration = 10;       // pasos que dura la zona de golpe activa
 attack_cooldown_time = 20;  // pasos de espera entre ataques
 attack_timer = 0;           // > 0 mientras el ataque está activo

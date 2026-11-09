@@ -66,3 +66,15 @@ if (attack_timer > 0) {
     atk_y1 = _cy - attack_h / 2;
     atk_y2 = _cy + attack_h / 2;
 }
+
+// --- Daño a enemigos ---
+if (attack_timer > 0) {
+    with (obj_enemy_parent) {
+        if (hit_timer <= 0
+            && rectangle_in_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom,
+                                      other.atk_x1, other.atk_y1, other.atk_x2, other.atk_y2) != 0) {
+            hp -= other.attack_damage;
+            hit_timer = hit_time;
+        }
+    }
+}
