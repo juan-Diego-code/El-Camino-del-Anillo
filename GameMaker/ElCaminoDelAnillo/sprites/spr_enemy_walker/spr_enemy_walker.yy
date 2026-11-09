@@ -2,9 +2,9 @@
   "$GMSprite":"v2",
   "%Name":"spr_enemy_walker",
   "bboxMode":0,
-  "bbox_bottom":63,
+  "bbox_bottom":52,
   "bbox_left":0,
-  "bbox_right":63,
+  "bbox_right":42,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"e0fc6668-e7b8-4623-bc8f-26bdf7ab171d","name":"e0fc6668-e7b8-4623-bc8f-26bdf7ab171d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"0fd9f982-50c6-4bb5-b41a-2c9ac6e1118d","name":"0fd9f982-50c6-4bb5-b41a-2c9ac6e1118d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":64,
+  "height":53,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"e21c2eef-2b5c-40ff-a989-9bdaedd4f022","blendMode":0,"displayName":"default","isLocked":false,"name":"e21c2eef-2b5c-40ff-a989-9bdaedd4f022","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"1a534489-eba7-4b1d-81b2-25e9649ff173","blendMode":0,"displayName":"default","isLocked":false,"name":"1a534489-eba7-4b1d-81b2-25e9649ff173","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_enemy_walker",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"e0fc6668-e7b8-4623-bc8f-26bdf7ab171d","path":"sprites/spr_enemy_walker/spr_enemy_walker.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"fabd983a-5152-45de-8263-e530c3c62b4c","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0fd9f982-50c6-4bb5-b41a-2c9ac6e1118d","path":"sprites/spr_enemy_walker/spr_enemy_walker.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"52408704-80b4-4c30-b722-c3463392cf26","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
@@ -86,5 +86,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":64,
+  "width":43,
 }
