@@ -5,9 +5,14 @@ var _right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 var _jump  = keyboard_check_pressed(vk_space)
           || keyboard_check_pressed(vk_up)
           || keyboard_check_pressed(ord("W"));
+var _attack = keyboard_check_pressed(ord("J"))
+           || keyboard_check_pressed(ord("X"));
 
 // --- Movimiento horizontal ---
 hsp = (_right - _left) * move_speed;
+if (hsp != 0) {
+    facing = sign(hsp);
+}
 
 // --- Gravedad ---
 vsp = min(vsp + grav, max_fall_speed);
@@ -38,3 +43,26 @@ y += vsp;
 
 // --- Límites de la habitación (izquierda y derecha) ---
 x = clamp(x, 0, room_width - sprite_width);
+
+// --- Ataque ---
+if (attack_cooldown > 0) attack_cooldown--;
+if (attack_timer > 0) attack_timer--;
+
+if (_attack && attack_cooldown <= 0) {
+    attack_timer = attack_duration;
+    attack_cooldown = attack_cooldown_time;
+}
+
+// Zona de golpe: delante del jugador, a la altura de su centro
+if (attack_timer > 0) {
+    var _cy = (bbox_top + bbox_bottom) / 2;
+    if (facing == 1) {
+        atk_x1 = bbox_right;
+        atk_x2 = bbox_right + attack_w;
+    } else {
+        atk_x1 = bbox_left - attack_w;
+        atk_x2 = bbox_left;
+    }
+    atk_y1 = _cy - attack_h / 2;
+    atk_y2 = _cy + attack_h / 2;
+}
