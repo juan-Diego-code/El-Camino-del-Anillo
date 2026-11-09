@@ -35,3 +35,6 @@ if (place_meeting(x, y + vsp, obj_solid)) {
     vsp = 0;
 }
 y += vsp;
+
+// --- Límites de la habitación (izquierda y derecha) ---
+x = clamp(x, 0, room_width - sprite_width);

@@ -11,3 +11,6 @@ for (var _x = 0; _x < room_width; _x += _size) {
 
 // Jugador de prueba: aparece en el aire, sobre el suelo
 instance_create_layer(room_width / 2, _floor_y - 256, "Instances", obj_player);
+
+// Cámara
+instance_create_layer(0, 0, "Instances", obj_camera);
