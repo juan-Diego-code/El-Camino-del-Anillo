@@ -34,7 +34,17 @@ Plan inicial sujeto a revisión conforme se definan alcance, plataformas y dispo
 
 ## Estado actual
 
-La rama prepara documentación y estructura de carpetas. Aún no hay proyecto GameMaker configurado, recursos del motor ni código GML.
+Etapa 2 en curso. Existe un proyecto GameMaker funcional con una sala de prueba (`rm_init`).
+
+Implementado:
+- Movimiento, salto, colisiones, ataque, vida, daño y retroceso del jugador.
+- Enemigo base y enemigo patrullero, con retroceso.
+- Cámara con seguimiento suave, fondo de la Comarca e interfaz de corazones.
+- Estados del jugador listos para conectar animaciones.
+
+Pendiente: animaciones, más enemigos, plataformas y salas de nivel, tilesets, audio, menús, inventario y guardado.
+
+Alcance previsto: al menos 5 niveles con enemigos propios de cada localización.
 
 ## Hitos por definir
 

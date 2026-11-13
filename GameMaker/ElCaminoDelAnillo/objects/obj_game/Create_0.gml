@@ -17,3 +17,6 @@ instance_create_layer(room_width / 2 + 200, _floor_y - sprite_get_height(spr_ene
 
 // Cámara (se crea al final, para que ya exista el jugador)
 instance_create_layer(0, 0, "Instances", obj_camera);
+
+// Interfaz (vida del jugador)
+instance_create_layer(0, 0, "Instances", obj_hud);

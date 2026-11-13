@@ -6,7 +6,7 @@
   "name":"scr_player_states",
   "parent":{
     "name":"Player",
-    "path":"folders/Player.yy",
+    "path":"folders/Scripts/Player.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

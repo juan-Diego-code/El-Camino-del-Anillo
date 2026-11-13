@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Characters",
-    "path":"folders/Characters.yy",
+    "path":"folders/Sprites/Characters.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

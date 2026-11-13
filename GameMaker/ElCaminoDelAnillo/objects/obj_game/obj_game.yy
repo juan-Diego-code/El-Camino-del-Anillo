@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Core",
-    "path":"folders/Core.yy",
+    "path":"folders/Objects/Core.yy",
   },
   "parentObjectId":null,
   "persistent":false,
