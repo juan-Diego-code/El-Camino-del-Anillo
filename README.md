@@ -1,14 +1,12 @@
 # El Camino del Anillo
 
-Proyecto de videojuego 2D de plataformas y exploración, concebido como una aventura metroidvania ambientada en el universo de *El Señor de los Anillos*. Esta rama prepara la estructura y la documentación para la futura versión desarrollada en GameMaker.
+Videojuego 2D de plataformas y exploración, inspirado en Hollow Knight y ambientado en el universo de *El Señor de los Anillos*. Se desarrolla en GameMaker con GML.
 
 ## Tecnologías
 
-- **GameMaker** como entorno de desarrollo previsto.
-- **GML (GameMaker Language)** para la lógica del juego que se incorporará más adelante.
-- **Git** para el historial y control de versiones.
-
-La carpeta `GameMaker/` organiza los recursos de destino, pero todavía no contiene un proyecto GameMaker funcional ni recursos importables. Crea y configura el proyecto desde GameMaker antes de añadir recursos. No se incluyen archivos de proyecto ni código GML en esta etapa.
+- **GameMaker** (IDE 2026.0.0.16, Runtime 2026.0.0.23).
+- **GML (GameMaker Language)** para toda la lógica del juego.
+- **Git y GitHub** para el control de versiones y la sincronización entre Mac y Windows.
 
 ## Visión del juego
 
@@ -17,23 +15,16 @@ La propuesta combina desplazamiento de plataformas, exploración de zonas conect
 ## Estructura
 
 ```text
-Documentation/              Diseño, narrativa, sistemas, elenco y planificación
+Documentation/              Diseño, narrativa, decisiones técnicas y planificación
 GameMaker/
-  Objects/                   Jugador, enemigos, jefes, NPC, objetos, combate, mundo e interfaz
-  Rooms/                     Regiones, interiores, arenas de jefes y menús
-  Scripts/                   Sistemas y lógica organizada por responsabilidad
-  Sprites/                   Personajes, entorno, objetos, efectos e interfaz
-  Tilesets/                  Regiones, arquitectura y peligros
-  Sounds/                    Música, ambiente, personajes, combate e interfaz
-  Fonts/                     Tipografías de interfaz y decorativas
-  Shaders/                   Posprocesado y efectos visuales
-  Sequences/                 Cinemáticas y eventos guionizados
+  ElCaminoDelAnillo/         Proyecto real de GameMaker (.yyp, objetos, sprites, rooms)
 ```
 
-Las carpetas `.gitkeep` solo mantienen esta organización en Git. No son recursos de GameMaker.
+El proyecto se abre desde `GameMaker/ElCaminoDelAnillo/ElCaminoDelAnillo.yyp`.
 
 ## Documentación
 
+- [Decisiones técnicas](Documentation/DECISIONES.md)
 - [Diseño general](Documentation/diseno-general.md)
 - [Historia y narrativa](Documentation/historia-y-narrativa.md)
 - [Mecánicas](Documentation/mecanicas.md)
@@ -42,4 +33,4 @@ Las carpetas `.gitkeep` solo mantienen esta organización en Git. No son recurso
 
 ## Estado
 
-Etapa inicial de estructuración y diseño. No hay código GML ni recursos de juego implementados todavía. La versión web anterior se retira de esta rama para dar paso al trabajo de GameMaker; el historial de Git se conserva.
+Prototipo en una sola sala (`rm_init`) con movimiento, salto, ataque, un enemigo patrullero y cámara. Consulta `Documentation/plan-de-desarrollo.md` para el detalle y los siguientes pasos.

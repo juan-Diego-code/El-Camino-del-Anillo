@@ -23,3 +23,15 @@ atk_x1 = 0;
 atk_y1 = 0;
 atk_x2 = 0;
 atk_y2 = 0;
+
+// --- Vida y daño recibido ---
+max_hp = 5;            // vida máxima
+hp = max_hp;           // vida actual
+invuln_time = 60;      // pasos de invulnerabilidad tras recibir daño
+invuln_timer = 0;      // > 0 mientras es invulnerable
+
+// --- Retroceso al recibir daño ---
+knockback_hsp = 3;   // empuje horizontal
+knockback_vsp = 3;   // empuje hacia arriba
+hurt_time = 15;      // pasos sin control tras un golpe
+hurt_timer = 0;      // > 0 mientras retrocede

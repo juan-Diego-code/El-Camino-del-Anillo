@@ -9,9 +9,16 @@ var _attack = keyboard_check_pressed(ord("J"))
            || keyboard_check_pressed(ord("X"));
 
 // --- Movimiento horizontal ---
-hsp = (_right - _left) * move_speed;
-if (hsp != 0) {
-    facing = sign(hsp);
+if (hurt_timer > 0) {
+    // Retrocediendo por un golpe: se conserva hsp y se ignoran las teclas
+    hurt_timer--;
+    _jump = false;
+    _attack = false;
+} else {
+    hsp = (_right - _left) * move_speed;
+    if (hsp != 0) {
+        facing = sign(hsp);
+    }
 }
 
 // --- Gravedad ---
@@ -77,4 +84,28 @@ if (attack_timer > 0) {
             hit_timer = hit_time;
         }
     }
+}
+
+// --- Daño recibido: contacto con enemigos ---
+if (invuln_timer > 0) invuln_timer--;
+
+if (invuln_timer <= 0) {
+    var _enemy = instance_place(x, y, obj_enemy_parent);
+    if (_enemy != noone) {
+        hp -= 1;
+        invuln_timer = invuln_time;
+
+        // Retroceso: en dirección contraria al enemigo
+        var _dir = sign((bbox_left + bbox_right) / 2 - (_enemy.bbox_left + _enemy.bbox_right) / 2);
+        if (_dir == 0) _dir = -facing;
+        hsp = _dir * knockback_hsp;
+        vsp = -knockback_vsp;
+        hurt_timer = hurt_time;
+        attack_timer = 0; // el golpe interrumpe el ataque
+    }
+}
+
+// --- Muerte: reinicia la sala ---
+if (hp <= 0) {
+    room_restart();
 }
