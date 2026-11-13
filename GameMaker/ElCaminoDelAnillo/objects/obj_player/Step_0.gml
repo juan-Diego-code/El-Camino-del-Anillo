@@ -82,6 +82,11 @@ if (attack_timer > 0) {
                                       other.atk_x1, other.atk_y1, other.atk_x2, other.atk_y2) != 0) {
             hp -= other.attack_damage;
             hit_timer = hit_time;
+
+            // Retroceso: lejos del jugador
+            knockback_dir = sign((bbox_left + bbox_right) / 2 - (other.bbox_left + other.bbox_right) / 2);
+            if (knockback_dir == 0) knockback_dir = other.facing;
+            knockback_timer = knockback_time;
         }
     }
 }
@@ -105,7 +110,18 @@ if (invuln_timer <= 0) {
     }
 }
 
-// --- Muerte: reinicia la sala ---
+// --- Muerte: reinicia la sala ---// --- Estado actual (decide qué animación se mostrará) ---
+if (hurt_timer > 0) {
+    state = PlayerState.HURT;
+} else if (attack_timer > 0) {
+    state = PlayerState.ATTACK;
+} else if (!place_meeting(x, y + 1, obj_solid)) {
+    state = PlayerState.AIR;
+} else if (hsp != 0) {
+    state = PlayerState.RUN;
+} else {
+    state = PlayerState.IDLE;
+}
 if (hp <= 0) {
     room_restart();
 }

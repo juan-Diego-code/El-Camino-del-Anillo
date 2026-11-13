@@ -12,6 +12,7 @@ if (attack_timer > 0) {
     draw_set_alpha(1);
 }
 
-// Vida provisional (se reemplazará por la interfaz)
+// Vida y estado provisionales (se reemplazarán por la interfaz)
+var _state_names = ["IDLE", "RUN", "AIR", "ATTACK", "HURT"];
 draw_set_color(c_white);
-draw_text(bbox_left, bbox_top - 14, "HP: " + string(hp));
+draw_text(bbox_left, bbox_top - 14, "HP: " + string(hp) + "  " + _state_names[state]);

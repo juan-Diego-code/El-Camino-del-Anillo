@@ -35,3 +35,6 @@ knockback_hsp = 3;   // empuje horizontal
 knockback_vsp = 3;   // empuje hacia arriba
 hurt_time = 15;      // pasos sin control tras un golpe
 hurt_timer = 0;      // > 0 mientras retrocede
+
+// --- Estado actual (se recalcula en cada paso) ---
+state = PlayerState.IDLE;
