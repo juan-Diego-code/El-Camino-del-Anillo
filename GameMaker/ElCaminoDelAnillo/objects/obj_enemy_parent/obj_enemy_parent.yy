@@ -10,8 +10,8 @@
   "name":"obj_enemy_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"Enemies",
+    "path":"folders/Enemies.yy",
   },
   "parentObjectId":null,
   "persistent":false,

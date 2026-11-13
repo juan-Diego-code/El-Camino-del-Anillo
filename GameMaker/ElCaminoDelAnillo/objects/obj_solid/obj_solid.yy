@@ -6,8 +6,8 @@
   "name":"obj_solid",
   "overriddenProperties":[],
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"World",
+    "path":"folders/World.yy",
   },
   "parentObjectId":null,
   "persistent":false,

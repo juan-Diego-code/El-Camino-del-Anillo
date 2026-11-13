@@ -9,8 +9,8 @@
   "name":"obj_enemy_walker",
   "overriddenProperties":[],
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"Enemies",
+    "path":"folders/Enemies.yy",
   },
   "parentObjectId":{
     "name":"obj_enemy_parent",

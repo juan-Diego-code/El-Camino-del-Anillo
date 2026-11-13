@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_player_states",
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"Player",
+    "path":"folders/Player.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

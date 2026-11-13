@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"Environment",
+    "path":"folders/Environment.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

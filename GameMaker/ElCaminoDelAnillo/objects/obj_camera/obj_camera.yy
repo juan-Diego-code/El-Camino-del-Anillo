@@ -9,8 +9,8 @@
   "name":"obj_camera",
   "overriddenProperties":[],
   "parent":{
-    "name":"ElCaminoDelAnillo",
-    "path":"ElCaminoDelAnillo.yyp",
+    "name":"Core",
+    "path":"folders/Core.yy",
   },
   "parentObjectId":null,
   "persistent":false,
