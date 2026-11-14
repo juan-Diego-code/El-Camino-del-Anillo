@@ -38,3 +38,10 @@ hurt_timer = 0;      // > 0 mientras retrocede
 
 // --- Estado actual (se recalcula en cada paso) ---
 state = PlayerState.IDLE;
+
+// --- Animación ---
+image_speed = 0;                // la animación la controlamos desde el Step
+run_anim_speed = 0.2;           // cuadros que avanza la carrera por paso (0.2 = 1 cuadro cada 5 pasos)
+prev_state = PlayerState.IDLE;  // sirve para detectar cuándo cambia el estado
+sprite_index = spr_player_idle;
+mask_index = spr_player_idle;   // la caja de colisión es siempre la del sprite quieto

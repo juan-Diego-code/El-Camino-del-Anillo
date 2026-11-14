@@ -49,7 +49,8 @@ if (place_meeting(x, y + vsp, obj_solid)) {
 y += vsp;
 
 // --- Límites de la habitación (izquierda y derecha) ---
-x = clamp(x, 0, room_width - sprite_width);
+// El origen está en los pies, al centro: se usa la caja de colisión para no salirse
+x = clamp(x, x - bbox_left, room_width - (bbox_right - x));
 
 // --- Ataque ---
 if (attack_cooldown > 0) attack_cooldown--;
@@ -110,7 +111,7 @@ if (invuln_timer <= 0) {
     }
 }
 
-// --- Muerte: reinicia la sala ---// --- Estado actual (decide qué animación se mostrará) ---
+// --- Estado actual (decide qué animación se muestra) ---
 if (hurt_timer > 0) {
     state = PlayerState.HURT;
 } else if (attack_timer > 0) {
@@ -122,6 +123,42 @@ if (hurt_timer > 0) {
 } else {
     state = PlayerState.IDLE;
 }
+
+// --- Animación según el estado ---
+if (state != prev_state) {
+    image_index = 0; // al cambiar de estado, la animación empieza desde el primer cuadro
+    prev_state = state;
+}
+
+switch (state) {
+    case PlayerState.IDLE:
+        sprite_index = spr_player_idle;
+        break;
+
+    case PlayerState.RUN:
+        sprite_index = spr_player_run;
+        image_index += run_anim_speed;
+        if (image_index >= sprite_get_number(spr_player_run)) {
+            image_index -= sprite_get_number(spr_player_run);
+        }
+        break;
+
+    case PlayerState.AIR:
+        sprite_index = spr_player_air;
+        break;
+
+    case PlayerState.ATTACK:
+        // Los cuadros del ataque se reparten a lo largo de attack_duration
+        sprite_index = spr_player_attack;
+        image_index = floor((attack_duration - attack_timer) * sprite_get_number(spr_player_attack) / attack_duration);
+        break;
+
+    case PlayerState.HURT:
+        sprite_index = spr_player_hurt;
+        break;
+}
+
+// --- Muerte: reinicia la sala ---
 if (hp <= 0) {
     room_restart();
 }
