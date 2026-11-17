@@ -7,6 +7,9 @@ var _jump  = keyboard_check_pressed(vk_space)
           || keyboard_check_pressed(ord("W"));
 var _attack = keyboard_check_pressed(ord("J"))
            || keyboard_check_pressed(ord("X"));
+var _jump_held = keyboard_check(vk_space)
+              || keyboard_check(vk_up)
+              || keyboard_check(ord("W"));
 
 // --- Movimiento horizontal ---
 if (hurt_timer > 0) {
@@ -24,10 +27,23 @@ if (hurt_timer > 0) {
 // --- Gravedad ---
 vsp = min(vsp + grav, max_fall_speed);
 
-// --- Salto (solo si hay suelo justo debajo) ---
+// --- Suelo y margen para saltar tras dejar un borde ---
 var _on_ground = place_meeting(x, y + 1, obj_solid);
-if (_jump && _on_ground) {
+if (_on_ground) {
+    coyote_timer = coyote_time;   // en el suelo, el margen está siempre lleno
+} else if (coyote_timer > 0) {
+    coyote_timer--;               // en el aire, se va agotando
+}
+
+// --- Salto: en el suelo o dentro del margen ---
+if (_jump && coyote_timer > 0) {
     vsp = -jump_speed;
+    coyote_timer = 0;             // evita un segundo salto en el aire
+}
+
+// --- Altura variable: si sueltas la tecla mientras subes, se frena la subida ---
+if (hurt_timer <= 0 && vsp < 0 && !_jump_held) {
+    vsp = max(vsp, -jump_cut_speed);
 }
 
 // --- Colisión horizontal ---

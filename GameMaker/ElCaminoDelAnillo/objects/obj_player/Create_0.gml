@@ -45,3 +45,8 @@ run_anim_speed = 0.2;           // cuadros que avanza la carrera por paso (0.2 =
 prev_state = PlayerState.IDLE;  // sirve para detectar cuándo cambia el estado
 sprite_index = spr_player_idle;
 mask_index = spr_player_idle;   // la caja de colisión es siempre la del sprite quieto
+
+// --- Sensación del salto ---
+jump_cut_speed = 3;   // si sueltas la tecla mientras subes, la subida se frena a esta velocidad
+coyote_time = 6;      // pasos de margen para saltar tras dejar un borde (6 pasos = 0.1 s)
+coyote_timer = 0;     // cuenta atrás del margen (se rellena mientras estás en el suelo)
