@@ -72,3 +72,10 @@ Reglas: minúsculas, guion bajo, sin tildes, espacios ni ñ.
 - Parallax y fondos por región
 - Definir las 5 localizaciones, sus enemigos y sus salas
 - Observación sin investigar: al mover la ventana con una tecla pulsada, el personaje puede seguir caminando (posible tecla atascada)
+
+## Diseño de niveles
+- Cada nivel tiene un único tipo de enemigo propio en todo el recorrido (Comarca: Nazgûl; Moria: orcos).
+- La variedad dentro de un nivel viene del comportamiento de los enemigos, no de sprites distintos.
+- Las plataformas se reparten por toda la extensión del nivel, no solo en un tramo.
+- Cada nivel empieza con un tramo de aprendizaje sin enemigos y la dificultad sube hasta el final.
+- El patrullero actual (`obj_enemy_walker`, sprite de orco) se reserva para Moria; en la Comarca se sustituye por el Nazgûl.

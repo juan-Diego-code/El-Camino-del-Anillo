@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_level_comarca",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_level_comarca",
+  "parent":{
+    "name":"Levels",
+    "path":"folders/Scripts/Levels.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
