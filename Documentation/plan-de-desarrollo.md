@@ -34,18 +34,19 @@ Plan inicial sujeto a revisión conforme se definan alcance, plataformas y dispo
 
 ## Estado actual
 
-Etapa 2 en curso. Existe un proyecto GameMaker funcional con una sala de prueba (`rm_init`).
+Etapa 2 completa y Etapa 3 en curso. Existe un nivel jugable de prueba (`rm_init`, la Comarca) con plataformas repartidas por todo el recorrido.
 
 Implementado:
-- Movimiento, salto, colisiones, ataque, vida, daño y retroceso del jugador.
-- Enemigo base y enemigo patrullero, con retroceso.
+- Jugador: movimiento, salto de altura variable, ataque, vida, daño, retroceso y animaciones por estado.
+- Enemigo base y patrullero (provisional, con sprite de orco), con retroceso.
 - Cámara con seguimiento suave, fondo de la Comarca e interfaz de corazones.
-- Estados del jugador listos para conectar animaciones.
+- Plataformas del nivel definidas como datos en un script.
 
-Pendiente: animaciones, más enemigos, plataformas y salas de nivel, tilesets, audio, menús, inventario y guardado.
+En marcha: enemigo Nazgûl (sprite y comportamiento).
 
-Alcance previsto: al menos 5 niveles con enemigos propios de cada localización.
+Pendiente: power-ups, salida y cambio de nivel, más niveles, tilesets, audio, menús, inventario y guardado.
 
+Alcance previsto: al menos 5 niveles (Comarca, Moria, Osgiliath, Puerta Negra y Mordor) con enemigos propios de cada uno.
 ## Hitos por definir
 
 Fechas, responsables, presupuesto, tamaño del equipo, criterios de aceptación y versión objetivo se definirán cuando exista un alcance aprobado.

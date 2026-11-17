@@ -33,4 +33,4 @@ El proyecto se abre desde `GameMaker/ElCaminoDelAnillo/ElCaminoDelAnillo.yyp`.
 
 ## Estado
 
-Prototipo en una sola sala (`rm_init`) con movimiento, salto, ataque, un enemigo patrullero y cámara. Consulta `Documentation/plan-de-desarrollo.md` para el detalle y los siguientes pasos.
+Prototipo jugable de un nivel (la Comarca): movimiento, salto, ataque, vida, enemigos patrulleros, plataformas y cámara. Consulta `Documentation/plan-de-desarrollo.md` para el detalle y los siguientes pasos.
