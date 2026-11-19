@@ -1,4 +1,6 @@
 /// Step Event de obj_player
+var _previous_bbox_bottom = bbox_bottom;
+
 // --- Entrada ---
 var _left  = keyboard_check(vk_left)  || keyboard_check(ord("A"));
 var _right = keyboard_check(vk_right) || keyboard_check(ord("D"));
@@ -113,17 +115,24 @@ if (invuln_timer > 0) invuln_timer--;
 
 if (invuln_timer <= 0) {
     var _enemy = instance_place(x, y, obj_enemy_parent);
-    if (_enemy != noone) {
-        hp -= 1;
-        invuln_timer = invuln_time;
+    if (_enemy != noone && _enemy.hp > 0) {
+        // Usar la posición previa admite una pequeña superposición al llegar desde arriba.
+        var _above_tolerance = max(8, vsp);
+        var _came_from_above = vsp >= 0
+                            && _previous_bbox_bottom <= _enemy.bbox_top + _above_tolerance;
 
-        // Retroceso: en dirección contraria al enemigo
-        var _dir = sign((bbox_left + bbox_right) / 2 - (_enemy.bbox_left + _enemy.bbox_right) / 2);
-        if (_dir == 0) _dir = -facing;
-        hsp = _dir * knockback_hsp;
-        vsp = -knockback_vsp;
-        hurt_timer = hurt_time;
-        attack_timer = 0; // el golpe interrumpe el ataque
+        if (!_came_from_above) {
+            hp -= _enemy.contact_damage;
+            invuln_timer = invuln_time;
+
+            // Retroceso: en dirección contraria al enemigo
+            var _dir = sign((bbox_left + bbox_right) / 2 - (_enemy.bbox_left + _enemy.bbox_right) / 2);
+            if (_dir == 0) _dir = -facing;
+            hsp = _dir * knockback_hsp;
+            vsp = -knockback_vsp;
+            hurt_timer = hurt_time;
+            attack_timer = 0; // el golpe interrumpe el ataque
+        }
     }
 }
 
