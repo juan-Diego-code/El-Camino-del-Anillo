@@ -1,52 +1,37 @@
 # Plan de desarrollo
 
-Plan inicial sujeto a revisión conforme se definan alcance, plataformas y disponibilidad de recursos.
+Plan de trabajo sujeto a revisión cuando se concrete el alcance de producción. El estado de esta página distingue sistemas ya implementados de trabajo acordado o pendiente.
 
-## Etapa 1: definición
+## Etapas
 
-- Acordar alcance, público y plataformas de destino.
-- Resolver los pilares de diseño y el recorrido narrativo.
-- Definir requisitos técnicos y convenciones de nombres.
-
-## Etapa 2: proyecto y prototipo
-
-- Crear un proyecto real desde GameMaker y establecer sus opciones.
-- Prototipar movimiento, salto, cámara y colisiones.
-- Validar la sensación de control con una sala de prueba.
-
-## Etapa 3: sistemas principales
-
-- Implementar exploración, combate, interacción y progresión.
-- Definir guardado, interfaz y configuración.
-- Documentar y revisar los sistemas antes de ampliar contenido.
-
-## Etapa 4: contenido vertical
-
-- Construir una sección representativa con arte, audio, enemigos y narrativa.
-- Evaluar ritmo, legibilidad, rendimiento y coherencia visual.
-- Ajustar alcance según lo aprendido.
-
-## Etapa 5: producción y pulido
-
-- Producir regiones, encuentros y contenido restante.
-- Revisar accesibilidad, errores, rendimiento y consistencia.
-- Preparar compilaciones y materiales para las plataformas acordadas.
+1. **Definición:** alcance, pilares, recorrido narrativo y requisitos técnicos.
+2. **Proyecto y prototipo:** proyecto GameMaker, controles, movimiento, cámara y colisiones.
+3. **Sistemas principales:** exploración, combate, interfaz, interacción y progresión.
+4. **Contenido vertical:** una sección representativa con arte, audio, enemigos y narrativa.
+5. **Producción y pulido:** regiones, encuentros, revisión de calidad y compilaciones para plataformas definidas.
 
 ## Estado actual
 
-Etapa 2 completa y Etapa 3 en curso. Existe un nivel jugable de prueba (`rm_init`, la Comarca) con plataformas repartidas por todo el recorrido.
+La etapa 2 está completada y la etapa 3 está en curso. Existe un prototipo jugable de La Comarca en `rm_init`.
 
-Implementado:
-- Jugador: movimiento, salto de altura variable, ataque, vida, daño, retroceso y animaciones por estado.
-- Enemigo base y patrullero (provisional, con sprite de orco), con retroceso.
-- Cámara con seguimiento suave, fondo de la Comarca e interfaz de corazones.
-- Plataformas del nivel definidas como datos en un script.
+Implementado: movimiento y colisiones; salto variable y coyote time; ataque; cinco puntos de vida, daño, invulnerabilidad y retroceso; estados y animaciones del jugador; enemigo padre y patrullero provisional (orco); cámara suave; HUD de corazones; fondo de La Comarca; constructor reutilizable y datos de sus 18 plataformas.
 
-En marcha: enemigo Nazgûl (sprite y comportamiento).
+## Próximos trabajos
 
-Pendiente: power-ups, salida y cambio de nivel, más niveles, tilesets, audio, menús, inventario y guardado.
+- Implementar el Nazgûl de La Comarca cuando esté listo su sprite definitivo: cinco puntos de vida, dos puntos de daño por contacto, patrulla y persecución al detectar al jugador. El daño por contacto configurable por enemigo también está pendiente.
+- Diseñar y construir salida y transición entre niveles.
+- Desarrollar power-ups y curación.
+- Definir enemigos y salas para Moria, Osgiliath, Puerta Negra y Mordor.
+- Parametrizar la apariencia de las plataformas por región.
+- Completar el arte del jugador y resolver los problemas visuales registrados en `DECISIONES.md`.
+- Añadir, cuando se desarrollen, parallax, tilesets, audio, menús, inventario y guardado.
 
-Alcance previsto: al menos 5 niveles (Comarca, Moria, Osgiliath, Puerta Negra y Mordor) con enemigos propios de cada uno.
+## Alcance de niveles
+
+Niveles principales, en orden: La Comarca, Moria, Osgiliath, Puerta Negra y Mordor. Abismo de Helm, Isengard y Campos del Pelennor son opciones futuras, no contenido comprometido.
+
+Cada nivel tendrá una especie de enemigo propia; la variedad de encuentros dentro de un nivel vendrá de comportamientos distintos. La Comarca tendrá Nazgûl y Moria tendrá orcos. Las plataformas recorrerán el nivel completo, con un inicio de aprendizaje sin enemigos y dificultad creciente. La aplicación de estas reglas a los otros niveles sigue pendiente de producción.
+
 ## Hitos por definir
 
-Fechas, responsables, presupuesto, tamaño del equipo, criterios de aceptación y versión objetivo se definirán cuando exista un alcance aprobado.
+Fechas, responsables, presupuesto, tamaño del equipo, criterios de aceptación y plataformas finales se concretarán cuando exista un alcance de producción aprobado.
